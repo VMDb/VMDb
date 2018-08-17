@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Comment {
 
     private long id;
@@ -17,6 +19,7 @@ public class Comment {
     }
 
     public Comment() {
+
     }
 
     public long getId() {
@@ -37,5 +40,22 @@ public class Comment {
 
     public String getContent() {
         return content;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return id == comment.id &&
+                rating == comment.rating &&
+                Objects.equals(author, comment.author) &&
+                Objects.equals(movie, comment.movie) &&
+                Objects.equals(content, comment.content);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, author, movie, content, rating);
     }
 }

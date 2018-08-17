@@ -1,22 +1,16 @@
 package domain;
 
-public class Account {
+public class Permission {
 
     private long id;
-    private Permission role;
     private String name;
 
-    public Account(long id, Permission role, String name) {
+    public Permission(long id, String name) {
         this.id = id;
-        this.role = role;
         this.name = name;
     }
 
-    public Account() {
-    }
-
-    public Permission getRole() {
-        return role;
+    public Permission() {
     }
 
     public long getId() {
@@ -26,4 +20,5 @@ public class Account {
     public String getName() {
         return name;
     }
+
 }
