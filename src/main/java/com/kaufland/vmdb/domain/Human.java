@@ -1,15 +1,25 @@
 package com.kaufland.vmdb.domain;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
 
+@Entity
+@Inheritance(strategy =  InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "human_type")
 public abstract class Human {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
+
     protected String name;
+    
+    @ManyToOne
     protected Country country;
+
     protected Instant dateOfBirth;
+
     protected Instant careerStart;
 
     public Human(long id, String name, Country country, Instant dateOfBirth, Instant careerStart) {

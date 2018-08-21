@@ -1,5 +1,6 @@
 package com.kaufland.vmdb.domain;
 
+import javax.persistence.OneToMany;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;

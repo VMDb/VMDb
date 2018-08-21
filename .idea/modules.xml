@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/drinkbox.iml" filepath="$PROJECT_DIR$/drinkbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/vmb.iml" filepath="$PROJECT_DIR$/vmb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vmdb.iml" filepath="$PROJECT_DIR$/vmdb.iml" />
     </modules>
   </component>
 </project>
