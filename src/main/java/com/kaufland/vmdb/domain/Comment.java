@@ -1,14 +1,25 @@
 package com.kaufland.vmdb.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Comment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToOne
     private Account author;
+
+    @ManyToOne
     private Movie movie;
+
     private String content;
+
     private byte rating;
+
 
     public Comment(long id, Account author, Movie movie, String content, byte rating) {
         this.id = id;

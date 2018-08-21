@@ -1,28 +1,52 @@
 package com.kaufland.vmdb.domain;
 
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String Title;
+
     private Instant releaseDate;
+
     private int duration;
+
+    @ManyToMany
     private List<Genre> genres;
+
+    @ManyToMany
     private List<Writer> writers;
+
+    @ManyToMany
     private List<Director> directors;
+
+    @ManyToMany
     private List<Producer> producers;
+
+    @ManyToMany
     private List<Actor> actors;
-    private String plot;
+
+    @ManyToMany
     private List<Country> countries;
+
+    @OneToMany
+    private List<Comment> comments;
+
+    private String plot;
+
     private double ratingCombined;
+
     private int ratings;
 
     public Movie(long id, String title, Instant releaseDate, int duration, List<Genre> genres, List<Writer> writers,
-                 List<Director> directors, List<Producer> producers, List<Actor> actors, String plot, List<Country> countries) {
+                 List<Director> directors, List<Producer> producers, List<Actor> actors, String plot, List<Country> countries, List<Comment> comments) {
         this.id = id;
         Title = title;
         this.releaseDate = releaseDate;
@@ -34,14 +58,13 @@ public class Movie {
         this.actors = actors;
         this.plot = plot;
         this.countries = countries;
+        this.comments = comments;
         this.ratingCombined = 0.0d;
         this.ratings = 0;
     }
 
     public Movie() {
     }
-
-
 
     public long getId() {
         return id;
@@ -87,6 +110,10 @@ public class Movie {
         return countries;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,11 +131,12 @@ public class Movie {
                 Objects.equals(producers, movie.producers) &&
                 Objects.equals(actors, movie.actors) &&
                 Objects.equals(plot, movie.plot) &&
-                Objects.equals(countries, movie.countries);
+                Objects.equals(countries, movie.countries) &&
+                Objects.equals(comments, movie.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, Title, releaseDate, duration, genres, writers, directors, producers, actors, plot, countries, ratingCombined, ratings);
+        return Objects.hash(id, Title, releaseDate, duration, genres, writers, directors, producers, actors, plot, countries, comments, ratingCombined, ratings);
     }
 }
