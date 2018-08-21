@@ -1,8 +1,8 @@
-package service.impl;
+package com.kaufland.vmdb.service.impl;
 
-import domain.Genre;
-import domain.Movie;
-import service.MovieService;
+import com.kaufland.vmdb.domain.Genre;
+import com.kaufland.vmdb.domain.Movie;
+import com.kaufland.vmdb.service.MovieService;
 
 import java.util.ArrayList;
 import java.util.List;

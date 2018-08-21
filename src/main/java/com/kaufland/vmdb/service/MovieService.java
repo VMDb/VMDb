@@ -1,7 +1,7 @@
-package service;
+package com.kaufland.vmdb.service;
 
-import domain.Genre;
-import domain.Movie;
+import com.kaufland.vmdb.domain.Genre;
+import com.kaufland.vmdb.domain.Movie;
 
 import java.util.List;
 

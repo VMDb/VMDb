@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VMDb.iml" filepath="$PROJECT_DIR$/VMDb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/drinkbox.iml" filepath="$PROJECT_DIR$/drinkbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vmb.iml" filepath="$PROJECT_DIR$/vmb.iml" />
     </modules>
   </component>
 </project>

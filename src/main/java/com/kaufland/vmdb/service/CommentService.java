@@ -1,8 +1,8 @@
-package service;
+package com.kaufland.vmdb.service;
 
-import domain.Account;
-import domain.Comment;
-import domain.Movie;
+import com.kaufland.vmdb.domain.Account;
+import com.kaufland.vmdb.domain.Comment;
+import com.kaufland.vmdb.domain.Movie;
 
 import java.util.List;
 

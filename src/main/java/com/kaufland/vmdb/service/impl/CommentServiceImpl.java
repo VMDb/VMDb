@@ -1,9 +1,9 @@
-package service.impl;
+package com.kaufland.vmdb.service.impl;
 
-import domain.Account;
-import domain.Comment;
-import domain.Movie;
-import service.CommentService;
+import com.kaufland.vmdb.domain.Account;
+import com.kaufland.vmdb.domain.Comment;
+import com.kaufland.vmdb.domain.Movie;
+import com.kaufland.vmdb.service.CommentService;
 
 import java.util.ArrayList;
 import java.util.List;

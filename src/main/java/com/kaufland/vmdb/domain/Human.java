@@ -1,5 +1,6 @@
-package domain;
+package com.kaufland.vmdb.domain;
 
+import javax.persistence.Entity;
 import java.time.Instant;
 import java.util.Objects;
 

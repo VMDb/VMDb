@@ -1,4 +1,4 @@
-package domain;
+package com.kaufland.vmdb.domain;
 
 public class Permission {
 
