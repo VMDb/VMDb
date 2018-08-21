@@ -1,7 +1,11 @@
 package com.kaufland.vmdb.domain;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import java.time.Instant;
 
+@Entity
+@DiscriminatorValue("producer")
 public class Producer extends Human {
 
     public Producer() {
