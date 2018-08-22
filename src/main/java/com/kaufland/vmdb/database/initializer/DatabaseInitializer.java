@@ -35,6 +35,7 @@ public class DatabaseInitializer implements ApplicationRunner {
         this.countryRepository = countryRepository;
         this.permissionRepository = permissionRepository;
         this.accountRepository = accountRepository;
+        this.actorRepository = actorRepository;
     }
 
     private void saveGenres(){
