@@ -5,11 +5,13 @@ import com.kaufland.vmdb.database.repo.CountryRepository;
 import com.kaufland.vmdb.database.repo.GenreRepository;
 import com.kaufland.vmdb.database.repo.MovieRepository;
 import com.kaufland.vmdb.domain.Actor;
+import com.kaufland.vmdb.database.repo.PermissionRepository;
 import com.kaufland.vmdb.domain.Country;
 import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.kaufland.vmdb.domain.Permission;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -30,12 +32,15 @@ public class DatabaseInitializer implements ApplicationRunner {
 
     private final ActorRepository actorRepository;
 
+    private final PermissionRepository permissionRepository;
+
     @Autowired
-    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository, ActorRepository actorRepository){
+    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository, ActorRepository actorRepository ,PermissionRepository permissionRepository){
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
         this.countryRepository = countryRepository;
         this.actorRepository = actorRepository;
+        this.permissionRepository = permissionRepository;
     }
 
     private void saveGenres(){
@@ -72,7 +77,7 @@ public class DatabaseInitializer implements ApplicationRunner {
         genreRepository.findAll().forEach(System.out::println);
     }
 
-    private void saveCountries(){
+    private void saveCountries() {
         Country us = new Country();
         us.setName("United States");
         Country india = new Country();
@@ -88,9 +93,16 @@ public class DatabaseInitializer implements ApplicationRunner {
         System.out.println(countryRepository.findAll().stream().map(Country::toString).collect(Collectors.joining("\n")));
 
     }
+    private void savePermissions(){
+        Permission admin = new Permission();
+        admin.setName("Admin");
+        Permission user = new Permission();
+        user.setName("User");
+
+        permissionRepository.saveAll(Arrays.asList(admin, user));
+    }
 
     @Override
-
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("heer");
 
@@ -102,6 +114,7 @@ public class DatabaseInitializer implements ApplicationRunner {
         actorRepository.save(actor);
         System.out.println(actorRepository.findAll());
 
+        savePermissions();
     }
 
 

@@ -4,8 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.time.Instant;
 
-@Entity
-@DiscriminatorValue("producer")
+@Entity(name = "producer")
 public class Producer extends Human {
 
     public Producer() {

@@ -4,8 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.time.Instant;
 
-@Entity
-@DiscriminatorValue("actor")
+@Entity(name = "actor")
 public class Actor extends Human {
 
     public Actor() {
