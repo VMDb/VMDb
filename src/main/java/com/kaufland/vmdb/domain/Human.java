@@ -21,12 +21,62 @@ public abstract class Human {
 
     protected Instant careerStart;
 
-    public Human(long id, String name, Country country, Instant dateOfBirth, Instant careerStart) {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Instant getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Instant dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Instant getCareerStart() {
+        return careerStart;
+    }
+
+    public void setCareerStart(Instant careerStart) {
+        this.careerStart = careerStart;
+    }
+
+    public Human(String name, Country country, Instant dateOfBirth, Instant careerStart) {
         this.name = name;
         this.country = country;
         this.dateOfBirth = dateOfBirth;
         this.careerStart = careerStart;
+    }
+
+    @Override
+    public String toString() {
+        return "Human{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country=" + country +
+                ", dateOfBirth=" + dateOfBirth +
+                ", careerStart=" + careerStart +
+                '}';
     }
 
     public Human() {

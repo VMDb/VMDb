@@ -2,6 +2,7 @@ package com.kaufland.vmdb.database.initializer;
 
 import com.kaufland.vmdb.database.repo.*;
 import com.kaufland.vmdb.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -20,11 +21,14 @@ public class DatabaseInitializer implements ApplicationRunner {
 
     private final CountryRepository countryRepository;
 
+    private final ActorRepository actorRepository;
+
     private final PermissionRepository permissionRepository;
 
     private final AccountRepository accountRepository;
 
-    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository,
+    @Autowired
+    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository, ActorRepository actorRepository,
                                PermissionRepository permissionRepository, AccountRepository accountRepository){
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
@@ -106,8 +110,12 @@ public class DatabaseInitializer implements ApplicationRunner {
 
         saveCountries();
         saveGenres();
+
+        Actor actor = new Actor("az", countryRepository.findById((long) 5).orElse(null), Instant.now(), Instant.ofEpochMilli(System.currentTimeMillis() - 10000000));
+        actorRepository.save(actor);
+        System.out.println(actorRepository.findAll());
+
         savePermissions();
-        saveAccounts();
     }
 
 }

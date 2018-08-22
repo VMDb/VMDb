@@ -11,7 +11,18 @@ public class Director extends Human {
         super();
     }
 
-    public Director(long id, String name, Country country, Instant dateOfBirth, Instant careerStart) {
-        super(id, name, country, dateOfBirth, careerStart);
+    public Director(String name, Country country, Instant dateOfBirth, Instant careerStart) {
+        super(name, country, dateOfBirth, careerStart);
+    }
+
+    @Override
+    public String toString() {
+        return "Director{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country=" + country +
+                ", dateOfBirth=" + dateOfBirth +
+                ", careerStart=" + careerStart +
+                '}';
     }
 }

@@ -11,7 +11,18 @@ public class Writer extends Human {
         super();
     }
 
-    public Writer(long id, String name, Country country, Instant dateOfBirth, Instant careerStart) {
-        super(id, name, country, dateOfBirth, careerStart);
+    public Writer(String name, Country country, Instant dateOfBirth, Instant careerStart) {
+        super(name, country, dateOfBirth, careerStart);
+    }
+
+    @Override
+    public String toString() {
+        return "Writer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country=" + country +
+                ", dateOfBirth=" + dateOfBirth +
+                ", careerStart=" + careerStart +
+                '}';
     }
 }
