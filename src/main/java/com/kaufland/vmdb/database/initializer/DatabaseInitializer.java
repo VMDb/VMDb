@@ -1,13 +1,7 @@
 package com.kaufland.vmdb.database.initializer;
 
-import com.kaufland.vmdb.database.repo.CountryRepository;
-import com.kaufland.vmdb.database.repo.GenreRepository;
-import com.kaufland.vmdb.database.repo.MovieRepository;
-import com.kaufland.vmdb.database.repo.PermissionRepository;
-import com.kaufland.vmdb.domain.Country;
-import com.kaufland.vmdb.domain.Genre;
-import com.kaufland.vmdb.domain.Movie;
-import com.kaufland.vmdb.domain.Permission;
+import com.kaufland.vmdb.database.repo.*;
+import com.kaufland.vmdb.domain.*;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -28,11 +22,15 @@ public class DatabaseInitializer implements ApplicationRunner {
 
     private final PermissionRepository permissionRepository;
 
-    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository, PermissionRepository permissionRepository){
+    private final AccountRepository accountRepository;
+
+    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository,
+                               PermissionRepository permissionRepository, AccountRepository accountRepository){
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
         this.countryRepository = countryRepository;
         this.permissionRepository = permissionRepository;
+        this.accountRepository = accountRepository;
     }
 
     private void saveGenres(){
@@ -92,12 +90,24 @@ public class DatabaseInitializer implements ApplicationRunner {
         permissionRepository.saveAll(Arrays.asList(admin, user));
     }
 
+    private void saveAccounts(){
+        Account a1 = new Account();
+        a1.setName("Pesho");
+        a1.setRole(permissionRepository.findById((long) 1).get());
+        Account a2 = new Account();
+        a2.setName("Viki");
+        a2.setRole(permissionRepository.findById((long) 2).get());
+
+        accountRepository.saveAll(Arrays.asList(a1, a2));
+    }
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
         saveCountries();
         saveGenres();
         savePermissions();
+        saveAccounts();
     }
 
 }

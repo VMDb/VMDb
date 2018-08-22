@@ -35,6 +35,14 @@ public class Account {
         return name;
     }
 
+    public void setRole(Permission role) {
+        this.role = role;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

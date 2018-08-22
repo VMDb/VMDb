@@ -1,47 +1,39 @@
 package com.kaufland.vmdb.service.impl;
 
+import com.kaufland.vmdb.database.repo.CommentRepository;
 import com.kaufland.vmdb.domain.Account;
 import com.kaufland.vmdb.domain.Comment;
 import com.kaufland.vmdb.domain.Movie;
 import com.kaufland.vmdb.service.CommentService;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private List<Comment> comments;
+    private final CommentRepository commentRepository;
 
-    public CommentServiceImpl(){
-        this.comments = new ArrayList<>();
+    public CommentServiceImpl(CommentRepository commentRepository){
+        this.commentRepository = commentRepository;
     }
 
     @Override
     public List<Comment> all() {
-        return new ArrayList<>(comments);
+        return commentRepository.findAll();
     }
 
     @Override
     public List<Comment> getByUser(Account user) {
-        return comments.stream()
-                       .filter(comment -> comment.getAuthor().equals(user))
-                       .collect(Collectors.toList());
+        return commentRepository.findAllByAuthorId(user.getId());
     }
 
     @Override
     public List<Comment> getByMovie(Movie movie) {
-        return comments.stream()
-                       .filter(comment -> comment.getMovie().equals(movie))
-                       .collect(Collectors.toList());
+        return commentRepository.findAllByMovieTitle(movie.getTitle());
     }
 
     @Override
     public CommentService publishComment(Movie movie, Comment comment) {
-
-
 
         return this;
     }
