@@ -21,8 +21,7 @@ public class Comment {
     private byte rating;
 
 
-    public Comment(long id, Account author, Movie movie, String content, byte rating) {
-        this.id = id;
+    public Comment(Account author, Movie movie, String content, byte rating) {
         this.author = author;
         this.movie = movie;
         this.content = content;
@@ -53,6 +52,22 @@ public class Comment {
         return content;
     }
 
+    public void setAuthor(Account author) {
+        this.author = author;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setRating(byte rating) {
+        this.rating = rating;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,5 +83,16 @@ public class Comment {
     @Override
     public int hashCode() {
         return Objects.hash(id, author, movie, content, rating);
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", author=" + author +
+                ", movie=" + movie +
+                ", content='" + content + '\'' +
+                ", rating=" + rating +
+                '}';
     }
 }
