@@ -2,6 +2,7 @@ package com.kaufland.vmdb.domain;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,32 +13,32 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String Title;
+    private String title;
 
     private Instant releaseDate;
 
     private int duration;
 
     @ManyToMany
-    private List<Genre> genres;
+    private List<Genre> genres = new ArrayList<>();
 
     @ManyToMany
-    private List<Writer> writers;
+    private List<Writer> writers = new ArrayList<>();
 
     @ManyToMany
-    private List<Director> directors;
+    private List<Director> directors = new ArrayList<>();
 
     @ManyToMany
-    private List<Producer> producers;
+    private List<Producer> producers = new ArrayList<>();
 
     @ManyToMany
-    private List<Actor> actors;
+    private List<Actor> actors = new ArrayList<>();
 
     @ManyToMany
-    private List<Country> countries;
+    private List<Country> countries = new ArrayList<>();
 
-    @OneToMany
-    private List<Comment> comments;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     private String plot;
 
@@ -45,10 +46,9 @@ public class Movie {
 
     private int ratings;
 
-    public Movie(long id, String title, Instant releaseDate, int duration, List<Genre> genres, List<Writer> writers,
+    public Movie(String title, Instant releaseDate, int duration, List<Genre> genres, List<Writer> writers,
                  List<Director> directors, List<Producer> producers, List<Actor> actors, String plot, List<Country> countries, List<Comment> comments) {
-        this.id = id;
-        Title = title;
+        this.title = title;
         this.releaseDate = releaseDate;
         this.duration = duration;
         this.genres = genres;
@@ -66,12 +66,64 @@ public class Movie {
     public Movie() {
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setReleaseDate(Instant releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public void setWriters(List<Writer> writers) {
+        this.writers = writers;
+    }
+
+    public void setDirectors(List<Director> directors) {
+        this.directors = directors;
+    }
+
+    public void setProducers(List<Producer> producers) {
+        this.producers = producers;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
+    public void setRatingCombined(double ratingCombined) {
+        this.ratingCombined = ratingCombined;
+    }
+
+    public void setRatings(int ratings) {
+        this.ratings = ratings;
+    }
+
     public long getId() {
         return id;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public Instant getReleaseDate() {
@@ -123,7 +175,7 @@ public class Movie {
                 duration == movie.duration &&
                 Double.compare(movie.ratingCombined, ratingCombined) == 0 &&
                 ratings == movie.ratings &&
-                Objects.equals(Title, movie.Title) &&
+                Objects.equals(title, movie.title) &&
                 Objects.equals(releaseDate, movie.releaseDate) &&
                 Objects.equals(genres, movie.genres) &&
                 Objects.equals(writers, movie.writers) &&
@@ -137,6 +189,26 @@ public class Movie {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, Title, releaseDate, duration, genres, writers, directors, producers, actors, plot, countries, comments, ratingCombined, ratings);
+        return Objects.hash(id, title, releaseDate, duration, genres, writers, directors, producers, actors, plot, countries, comments, ratingCombined, ratings);
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", duration=" + duration +
+                ", genres=" + genres +
+                ", writers=" + writers +
+                ", directors=" + directors +
+                ", producers=" + producers +
+                ", actors=" + actors +
+                ", countries=" + countries +
+                ", comments=" + comments +
+                ", plot='" + plot + '\'' +
+                ", ratingCombined=" + ratingCombined +
+                ", ratings=" + ratings +
+                '}';
     }
 }
