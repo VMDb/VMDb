@@ -3,9 +3,11 @@ package com.kaufland.vmdb.database.initializer;
 import com.kaufland.vmdb.database.repo.CountryRepository;
 import com.kaufland.vmdb.database.repo.GenreRepository;
 import com.kaufland.vmdb.database.repo.MovieRepository;
+import com.kaufland.vmdb.database.repo.PermissionRepository;
 import com.kaufland.vmdb.domain.Country;
 import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
+import com.kaufland.vmdb.domain.Permission;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -24,10 +26,13 @@ public class DatabaseInitializer implements ApplicationRunner {
 
     private final CountryRepository countryRepository;
 
-    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository){
+    private final PermissionRepository permissionRepository;
+
+    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository, PermissionRepository permissionRepository){
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
         this.countryRepository = countryRepository;
+        this.permissionRepository = permissionRepository;
     }
 
     private void saveGenres(){
@@ -61,7 +66,6 @@ public class DatabaseInitializer implements ApplicationRunner {
         List<Genre> genres = Arrays.asList(action, comedy, scifi,adventure,crime,drama
                 ,fantasy,historical,horror,mystery,thriller,western,animation);
         genreRepository.saveAll(genres);
-        genreRepository.findAll().forEach(System.out::println);
     }
 
     private void saveCountries(){
@@ -77,22 +81,23 @@ public class DatabaseInitializer implements ApplicationRunner {
         uk.setName("UK");
 
         countryRepository.saveAll(Arrays.asList(us, uk, india, bulgaria));
-        System.out.println(countryRepository.findAll().stream().map(Country::toString).collect(Collectors.joining("\n")));
+    }
 
+    private void savePermissions(){
+        Permission admin = new Permission();
+        admin.setName("Admin");
+        Permission user = new Permission();
+        user.setName("User");
 
-
+        permissionRepository.saveAll(Arrays.asList(admin, user));
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("heer");
-
 
         saveCountries();
         saveGenres();
-        
-
+        savePermissions();
     }
-
 
 }

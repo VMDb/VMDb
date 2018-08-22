@@ -4,9 +4,8 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
 
-@Entity
-@Inheritance(strategy =  InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "human_type")
+@Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class Human {
 
     @Id

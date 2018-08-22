@@ -4,8 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.time.Instant;
 
-@Entity
-@DiscriminatorValue("director")
+@Entity(name = "director")
 public class Director extends Human {
 
     public Director() {
