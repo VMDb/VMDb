@@ -21,11 +21,23 @@ public class Country {
 
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
