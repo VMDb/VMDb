@@ -12,7 +12,18 @@ public class Actor extends Human {
         super();
     }
 
-    public Actor(long id, String name, Country country, Instant dateOfBirth, Instant careerStart) {
-        super(id, name, country, dateOfBirth, careerStart);
+    public Actor(String name, Country country, Instant dateOfBirth, Instant careerStart) {
+        super(name, country, dateOfBirth, careerStart);
+    }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country=" + country +
+                ", dateOfBirth=" + dateOfBirth +
+                ", careerStart=" + careerStart +
+                '}';
     }
 }

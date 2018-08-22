@@ -1,11 +1,15 @@
 package com.kaufland.vmdb.database.initializer;
 
+import com.kaufland.vmdb.database.repo.ActorRepository;
 import com.kaufland.vmdb.database.repo.CountryRepository;
 import com.kaufland.vmdb.database.repo.GenreRepository;
 import com.kaufland.vmdb.database.repo.MovieRepository;
+import com.kaufland.vmdb.domain.Actor;
 import com.kaufland.vmdb.domain.Country;
 import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -24,10 +28,14 @@ public class DatabaseInitializer implements ApplicationRunner {
 
     private final CountryRepository countryRepository;
 
-    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository){
+    private final ActorRepository actorRepository;
+
+    @Autowired
+    public DatabaseInitializer(MovieRepository movieRepository, GenreRepository genreRepository, CountryRepository countryRepository, ActorRepository actorRepository){
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
         this.countryRepository = countryRepository;
+        this.actorRepository = actorRepository;
     }
 
     private void saveGenres(){
@@ -79,18 +87,20 @@ public class DatabaseInitializer implements ApplicationRunner {
         countryRepository.saveAll(Arrays.asList(us, uk, india, bulgaria));
         System.out.println(countryRepository.findAll().stream().map(Country::toString).collect(Collectors.joining("\n")));
 
-
-
     }
 
     @Override
+
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("heer");
 
 
         saveCountries();
         saveGenres();
-        
+
+        Actor actor = new Actor("az", countryRepository.findById((long) 5).orElse(null), Instant.now(), Instant.ofEpochMilli(System.currentTimeMillis() - 10000000));
+        actorRepository.save(actor);
+        System.out.println(actorRepository.findAll());
 
     }
 

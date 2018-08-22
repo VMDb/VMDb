@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 public class MovieServiceImpl implements MovieService {
 
+    /**
+     *TODO Replace with MovieRepository
+     *TODO Redo methods
+     */
     private List<Movie> movies;
 
     public MovieServiceImpl(){

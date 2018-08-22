@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class CommentServiceImpl implements CommentService {
 
+    /**
+     *TODO Replace with CommentRepository
+     *TODO Redo methods
+     */
     private List<Comment> comments;
 
     public CommentServiceImpl(){
