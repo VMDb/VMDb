@@ -1,7 +1,7 @@
 package com.kaufland.vmdb.domain;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+
 import java.time.Instant;
 
 @Entity(name = "writer")
@@ -17,6 +17,7 @@ public class Writer extends Human {
 
     @Override
     public String toString() {
+
         return "Writer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +

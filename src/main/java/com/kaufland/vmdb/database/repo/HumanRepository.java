@@ -10,11 +10,11 @@ import java.util.List;
 @NoRepositoryBean
 public interface HumanRepository<T extends Human> extends JpaRepository<T, Long> {
 
-    List<T> findAllByName(String name);
+    List<T> findAllByName       (String name);
 
-    List<T> findAllByNameLike(String name);
+    List<T> findAllByNameLike   (String name);
 
-    List<T> findAllByCountry(Country country);
+    List<T> findAllByCountry    (Country country);
 
     List<T> findAllByCountryName(String name);
 }

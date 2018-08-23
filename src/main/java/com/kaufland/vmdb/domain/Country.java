@@ -12,8 +12,8 @@ public class Country {
     private long id;
     private String name;
 
-    public Country(long id, String name) {
-        this.id = id;
+    public Country(String name) {
+
         this.name = name;
     }
 

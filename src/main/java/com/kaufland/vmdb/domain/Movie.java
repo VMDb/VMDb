@@ -1,10 +1,21 @@
 package com.kaufland.vmdb.domain;
 
+import com.kaufland.vmdb.database.initializer.DatabaseInitializer;
+import org.hibernate.Hibernate;
+import org.json.JSONObject;
+
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Entity
 public class Movie {
@@ -12,6 +23,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
 
     private String title;
 
@@ -34,8 +46,8 @@ public class Movie {
     @ManyToMany
     private List<Actor> actors = new ArrayList<>();
 
-    @ManyToMany
-    private List<Country> countries = new ArrayList<>();
+    @ManyToOne
+    private Country country;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
@@ -47,7 +59,7 @@ public class Movie {
     private int ratings;
 
     public Movie(String title, Instant releaseDate, int duration, List<Genre> genres, List<Writer> writers,
-                 List<Director> directors, List<Producer> producers, List<Actor> actors, String plot, List<Country> countries, List<Comment> comments) {
+                 List<Director> directors, List<Producer> producers, List<Actor> actors, String plot, Country country, List<Comment> comments) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.duration = duration;
@@ -57,13 +69,32 @@ public class Movie {
         this.producers = producers;
         this.actors = actors;
         this.plot = plot;
-        this.countries = countries;
+        this.country = country;
         this.comments = comments;
         this.ratingCombined = 0.0d;
         this.ratings = 0;
+
+
     }
 
     public Movie() {
+    }
+
+    public static Movie fromJSON(JSONObject object){
+        Movie movie = new Movie();
+        movie.title = object.getString("Title");
+        try {
+            movie.releaseDate = new SimpleDateFormat("dd MMM yyyy").parse(object.getString("Released")).toInstant();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        movie.duration = Integer.parseInt(object.getString("Runtime").split("\\s")[0]);
+        System.out.println(DatabaseInitializer.getInstance().getGenreRepository().findAllByName("Comedy")) ;
+        movie.genres.forEach(System.out::println);
+
+
+        return movie;
     }
 
     public void setTitle(String title) {
@@ -98,8 +129,8 @@ public class Movie {
         this.actors = actors;
     }
 
-    public void setCountries(List<Country> countries) {
-        this.countries = countries;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public void setComments(List<Comment> comments) {
@@ -158,8 +189,8 @@ public class Movie {
         return plot;
     }
 
-    public List<Country> getCountries() {
-        return countries;
+    public Country getCountry() {
+        return country;
     }
 
     public List<Comment> getComments() {
@@ -183,13 +214,13 @@ public class Movie {
                 Objects.equals(producers, movie.producers) &&
                 Objects.equals(actors, movie.actors) &&
                 Objects.equals(plot, movie.plot) &&
-                Objects.equals(countries, movie.countries) &&
+                Objects.equals(country, movie.country) &&
                 Objects.equals(comments, movie.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, releaseDate, duration, genres, writers, directors, producers, actors, plot, countries, comments, ratingCombined, ratings);
+        return Objects.hash(id, title, releaseDate, duration, genres, writers, directors, producers, actors, plot, country, comments, ratingCombined, ratings);
     }
 
     @Override
@@ -204,7 +235,7 @@ public class Movie {
                 ", directors=" + directors +
                 ", producers=" + producers +
                 ", actors=" + actors +
-                ", countries=" + countries +
+                ", country=" + country +
                 ", comments=" + comments +
                 ", plot='" + plot + '\'' +
                 ", ratingCombined=" + ratingCombined +

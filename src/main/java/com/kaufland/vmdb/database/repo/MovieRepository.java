@@ -1,5 +1,6 @@
 package com.kaufland.vmdb.database.repo;
 
+import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findAllByTitleLike(String title);
 
+    List<Movie> findAllByPlotLike(String plot);
+
+    List<Movie> findAllByGenresIn(Genre... genres);
 }

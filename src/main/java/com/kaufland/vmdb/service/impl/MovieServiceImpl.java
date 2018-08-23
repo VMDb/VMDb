@@ -1,55 +1,52 @@
 package com.kaufland.vmdb.service.impl;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.kaufland.vmdb.database.repo.MovieRepository;
 import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
 import com.kaufland.vmdb.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MovieServiceImpl implements MovieService {
 
-    /**
-     *TODO Replace with MovieRepository
-     *TODO Redo methods
-     */
-    private List<Movie> movies;
+    private final MovieRepository movieRepository;
 
-    public MovieServiceImpl(){
-        this.movies = new ArrayList<>();
+    @Autowired
+    public MovieServiceImpl(MovieRepository movieRepository){
+        this.movieRepository = movieRepository;
     }
 
     @Override
     public MovieService addMovie(Movie movie) {
-        movies.add(movie);
+        movieRepository.save(movie);
         return this;
     }
 
     @Override
     public Movie getByID(long id) {
-        return movies.stream()
-                    .filter(movie -> movie.getId() == id)
-                    .findFirst()
-                    .orElseGet(null);
+        return movieRepository.findById(id)
+                              .orElse(null);
+
     }
 
     @Override
     public List<Movie> all() {
-        return new ArrayList<>(movies);
+        return movieRepository.findAll();
     }
 
     @Override
     public List<Movie> getByKeyword(String keyword) {
-        return movies.stream()
-                     .filter(movie -> (movie.getTitle().contains(keyword) || movie.getPlot().contains(keyword)))
-                     .collect(Collectors.toList());
+        return movieRepository.findAllByPlotLike(keyword);
     }
 
     @Override
     public List<Movie> getByGenre(Genre genre) {
-        return movies.stream()
-                     .filter(movie -> movie.getGenres().stream().anyMatch(genre1 -> genre1.equals(genre)))
-                     .collect(Collectors.toList());
+        return movieRepository.findAllByGenresIn(genre);
     }
 }
