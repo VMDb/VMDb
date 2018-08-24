@@ -8,9 +8,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.util.List;
 
 @NoRepositoryBean
-public interface HumanRepository<T extends Human> extends JpaRepository<T, Long> {
-
-    List<T> findAllByName       (String name);
+public interface HumanRepository<T extends Human> extends NameSearchableRepository<T>{
 
     List<T> findAllByNameLike   (String name);
 

@@ -8,6 +8,10 @@ import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.Year;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +36,7 @@ public class MovieServiceImpl implements MovieService {
     public Movie getByID(long id) {
         return movieRepository.findById(id)
                               .orElse(null);
-
+        
     }
 
     @Override

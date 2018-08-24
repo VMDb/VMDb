@@ -1,7 +1,5 @@
 package com.kaufland.vmdb.database.initializer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kaufland.vmdb.access.OmdbAccess;
 import com.kaufland.vmdb.database.repo.*;
 import com.kaufland.vmdb.domain.*;
@@ -9,15 +7,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -83,43 +77,67 @@ public class DatabaseInitializer implements ApplicationRunner {
     }
 
     private void trySaveMovieIDK(){
-        JSONObject object = OmdbAccess.queryMovieByTitle("Avengers: Infinity War");
-        System.out.println(object);
-        Movie movie = new Movie();
-        movie.setTitle(object.getString("Title"));
+
+        OmdbAccess.movieIds.stream().forEach(id -> {
+            JSONObject object = OmdbAccess.queryMovieById(id);
+            System.out.println("Saving movie :: "+object.getString("Title"));
+            Movie movie = new Movie();
+            movie.setTitle(object.getString("Title"));
+            try {
+                movie.setReleaseDate(new SimpleDateFormat("dd MMM yyyy").parse(object.getString("Released")).toInstant());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            movie.setGenres(Arrays.asList(object.getString("Genre").split(","))
+                    .stream()
+                    .map(str -> str.trim())
+                    .map(str -> genreRepository.findByName(str))
+                    .collect(Collectors.toList()));
+            movie.setWriters(Arrays.asList(object.getString("Writer").split(",")).stream()
+                    .map(str -> str.replaceAll("\\([\\w\\s]+\\)", "").trim())
+                    .map(str -> writerRepository.save(getByName(str, Writer.class, writerRepository)))
+                    .collect(Collectors.toList()));
+            movie.setActors(Arrays.asList(object.getString("Actors").split(","))
+                    .stream()
+                    .map(str -> str.trim())
+                    .map(str -> actorRepository.save(getByName(str, Actor.class, actorRepository)))
+                    .collect(Collectors.toList()));
+            movie.setDirectors(Arrays.asList(object.getString("Director").split(","))
+                    .stream()
+                    .map(str -> str.trim())
+                    .map(str -> directorRepository.save(getByName(str, Director.class, directorRepository)))
+                    .collect(Collectors.toList()));
+
+            movie.setPosterUrl(object.getString("Poster"));
+            if(Integer.parseInt(""+id.charAt(id.length() - 1)) % 2 == 0)
+                movie.setProducers(Arrays.asList(producerRepository.findById((long) 2).get()));
+            else
+                movie.setProducers(Arrays.asList(producerRepository.findById((long) 1).get()));
+
+            movie.setCountry(countryRepository.save(getByName(object.getString("Country").split(",")[0], Country.class, countryRepository)));
+            movie.setPlot(object.getString("Plot"));
+            movie.setComments(null);
+            movie.setDuration(Integer.parseInt(object.getString("Runtime").split("\\s")[0]));
+
+            System.out.println(movieRepository.save(movie));
+        });
+
+    }
+
+    private <T extends NameSettable> T getByName(String name, Class<T> clazz, NameSearchableRepository<T> repo){
+        T result = repo.findByName(name);
+        if(result != null)
+            return result;
         try {
-            movie.setReleaseDate(new SimpleDateFormat("dd MMM yyyy").parse(object.getString("Released")).toInstant());
-        } catch (ParseException e) {
+            result = clazz.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
-        movie.setGenres(Arrays.asList(object.getString("Genre").split(","))
-                              .stream()
-                              .map(str -> str.trim())
-                              .map(str -> genreRepository.findByName(str))
-                              .collect(Collectors.toList()));
-        movie.setWriters(Arrays.asList(object.getString("Writer").split(",")).stream()
-                               .map(str -> str.replaceAll("\\([\\w\\s]+\\)", "").trim())
-                               .map(str -> writerRepository.save(new Writer(str, null, null, null)))
-                               .collect(Collectors.toList()));
-
-        movie.setActors(Arrays.asList(object.getString("Actors").split(","))
-                .stream()
-                .map(str -> str.trim())
-                .map(str -> actorRepository.save(new Actor(str, null, null, null)))
-                .collect(Collectors.toList()));
-        movie.setDirectors(Arrays.asList(object.getString("Director").split(","))
-                .stream()
-                .map(str -> str.trim())
-                .map(str -> directorRepository.save(new Director(str, null, null, null)))
-                .collect(Collectors.toList()));
-
-        movie.setCountry(countryRepository.save(new Country(object.getString("Country"))));
-        movie.setPlot(object.getString("Plot"));
-        movie.setComments(null);
-        movie.setDuration(Integer.parseInt(object.getString("Runtime").split("\\s")[0]));
-
-        System.out.println(movie);
+        result.setName(name);
+        return result;
     }
 
     private void saveGenres(){
@@ -246,8 +264,8 @@ public class DatabaseInitializer implements ApplicationRunner {
         directorRepository.save(d11);
 
 
-        Producer p1 = new Producer("az", countryRepository.findById((long) 3).orElse(null), Instant.now(), Instant.ofEpochMilli(System.currentTimeMillis() - 10000000));
-        Producer p11 = new Producer("Tommyto", countryRepository.findById((long) 4).orElse(null), Instant.now(), Instant.ofEpochMilli(System.currentTimeMillis() - 10000000));
+        Producer p1 = new Producer("VladkoSlatko", countryRepository.findById((long) 3).orElse(null), Instant.now(), Instant.ofEpochMilli(System.currentTimeMillis() - 10000000));
+        Producer p11 = new Producer("DidakaMadafaka", countryRepository.findById((long) 4).orElse(null), Instant.now(), Instant.ofEpochMilli(System.currentTimeMillis() - 10000000));
 
 
 

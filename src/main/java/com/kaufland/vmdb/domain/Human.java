@@ -1,12 +1,14 @@
 package com.kaufland.vmdb.domain;
 
+import com.kaufland.vmdb.database.repo.NameSettable;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
 
 @Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
-public abstract class Human {
+public abstract class Human implements NameSettable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

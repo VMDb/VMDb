@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CountryRepository extends JpaRepository<Country, Long> {
-
-    List<Country> findAllByName(String name);
+public interface CountryRepository extends NameSearchableRepository<Country>{
 
 }

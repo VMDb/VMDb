@@ -24,7 +24,6 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     private String title;
 
     private Instant releaseDate;
@@ -52,7 +51,10 @@ public class Movie {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @Column(columnDefinition="text")
     private String plot;
+
+    private String posterUrl;
 
     private double ratingCombined;
 
@@ -95,6 +97,14 @@ public class Movie {
 
 
         return movie;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
     public void setTitle(String title) {
