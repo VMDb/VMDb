@@ -1,15 +1,11 @@
 package com.kaufland.vmdb.service.impl;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.kaufland.vmdb.database.repo.MovieRepository;
 import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
+import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,8 +32,10 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> all() {
-        return movieRepository.findAll();
+    public List<MovieDTO> all() {
+
+        return movieRepository.findAll().stream().map(e -> new MovieDTO(e)).collect(Collectors.toList());
+
     }
 
     @Override

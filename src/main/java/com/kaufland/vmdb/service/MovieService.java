@@ -2,6 +2,7 @@ package com.kaufland.vmdb.service;
 
 import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
+import com.kaufland.vmdb.dto.MovieDTO;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface MovieService {
 
     Movie getByID(long id);
 
-    List<Movie> all();
+    List<MovieDTO> all();
 
     List<Movie> getByKeyword(String keyword);
 
