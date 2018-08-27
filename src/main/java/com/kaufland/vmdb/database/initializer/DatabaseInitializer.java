@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Component
@@ -75,6 +76,42 @@ public class DatabaseInitializer implements ApplicationRunner {
 
         //Movie m = Movie.fromJSON(OmdbAccess.queryMovieByTitle("What's your number"));
     }
+
+    private Instant getRandomDate(int seed){
+        return Instant.ofEpochSecond((System.currentTimeMillis() / 1000) - (new Random().nextInt(seed) + 1) * (3600 * 24 * 365));
+    }
+
+    private Country getRandomCountry(){
+        return countryRepository.getOne((long) new Random().nextInt(4) + 1);
+    }
+
+    private void setCountriesIDK(){
+        actorRepository.findAll().forEach(actor -> {
+            actor.setCareerStart(getRandomDate(40));
+            actor.setDateOfBirth(getRandomDate(80));
+            actor.setCountry(getRandomCountry());
+            actorRepository.save(actor);
+        });
+        directorRepository.findAll().forEach(actor -> {
+            actor.setCareerStart(getRandomDate(40));
+            actor.setDateOfBirth(getRandomDate(80));
+            actor.setCountry(getRandomCountry());
+            directorRepository.save(actor);
+        });
+        writerRepository.findAll().forEach(actor -> {
+            actor.setCareerStart(getRandomDate(40));
+            actor.setDateOfBirth(getRandomDate(80));
+            actor.setCountry(getRandomCountry());
+            writerRepository.save(actor);
+        });
+        producerRepository.findAll().forEach(actor -> {
+            actor.setCareerStart(getRandomDate(40));
+            actor.setDateOfBirth(getRandomDate(80));
+            actor.setCountry(getRandomCountry());
+            producerRepository.save(actor);
+        });
+    }
+
 
     private void trySaveMovieIDK(){
 
@@ -235,15 +272,8 @@ public class DatabaseInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        saveCountries();
-        saveMoviePeople();
-        saveGenres();
-
-        saveMovies();
-
-        savePermissions();
-        testtest();
-        trySaveMovieIDK();
+        actorRepository.findAll()
+                       .forEach(System.out::println);
     }
 
     private void saveMoviePeople() {
