@@ -1,12 +1,14 @@
 package com.kaufland.vmdb.domain;
 
+import com.kaufland.vmdb.database.repo.NameSettable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Country {
+public class Country implements NameSettable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
