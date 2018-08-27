@@ -30,7 +30,7 @@ public class Movie {
 
     private int duration;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Genre> genres = new ArrayList<>();
 
     @ManyToMany
@@ -75,7 +75,6 @@ public class Movie {
         this.comments = comments;
         this.ratingCombined = 0.0d;
         this.ratings = 0;
-
 
     }
 
@@ -161,6 +160,14 @@ public class Movie {
 
     public long getId() {
         return id;
+    }
+
+    public double getRatingCombined() {
+        return ratingCombined;
+    }
+
+    public int getRatings() {
+        return ratings;
     }
 
     public String getTitle() {

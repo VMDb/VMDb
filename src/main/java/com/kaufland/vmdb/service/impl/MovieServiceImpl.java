@@ -6,9 +6,12 @@ import com.kaufland.vmdb.domain.Movie;
 import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
@@ -33,8 +36,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<MovieDTO> all() {
+        List<Movie> movies = movieRepository.findAll();
+        movies.forEach(m -> m.getActors().size());
 
-        return movieRepository.findAll().stream().map(e -> new MovieDTO(e)).collect(Collectors.toList());
+        return movies.stream().map(e -> new MovieDTO(e)).collect(Collectors.toList());
 
     }
 

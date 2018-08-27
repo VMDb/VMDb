@@ -72,11 +72,6 @@ public class DatabaseInitializer implements ApplicationRunner {
         return genreRepository;
     }
 
-    private void testtest(){
-
-        //Movie m = Movie.fromJSON(OmdbAccess.queryMovieByTitle("What's your number"));
-    }
-
     private Instant getRandomDate(int seed){
         return Instant.ofEpochSecond((System.currentTimeMillis() / 1000) - (new Random().nextInt(seed) + 1) * (3600 * 24 * 365));
     }
@@ -272,8 +267,6 @@ public class DatabaseInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        actorRepository.findAll()
-                       .forEach(System.out::println);
     }
 
     private void saveMoviePeople() {
