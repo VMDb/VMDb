@@ -6,6 +6,10 @@ import com.kaufland.vmdb.domain.Movie;
 import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,10 +40,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<MovieDTO> all() {
-        List<Movie> movies = movieRepository.findAll();
+        Pageable limit = PageRequest.of(0,20);
+        Page<Movie> movies = movieRepository.findAll(limit);
         movies.forEach(m -> m.getActors().size());
 
-        return movies.stream().map(e -> new MovieDTO(e)).collect(Collectors.toList());
+        return movies.stream().map(MovieDTO::new).collect(Collectors.toList());
 
     }
 

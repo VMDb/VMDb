@@ -1,11 +1,49 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Avengers is THE BEST!!!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" type="image/png" href="http://icons-for-free.com/free-icons/png/16/2624867.png"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-<p th:text="'Hello!'" />
-<p th:each="movie: ${movies}" th:text="${movie.title}"></p>
+
+<div class="container">
+    <div class="header">
+        Header
+    </div>
+    <div class="content">
+        <div th:each="movie, iter: ${movies}" class="poster" th:style="'background-image: url(' + ${movie.poster} + ');'" th:onclick="'getMovie(\'' + ${iter.index} + '\');'">
+
+            <div class="poster-info">
+                <h3 th:text="${movie.title}"></h3>
+                <p th:text="${movie.releaseYear}"></p>
+                <p th:text="${movie.rating}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="top-sidebar">
+        <div class="selected-movie">
+            <img class="selected-movie-image">
+            <h2 class="selected-movie-title"></h2>
+            <p class="selected-movie-year"></p>
+            <p class="selected-movie-genres"></p>
+            <p class="selected-movie-plot"></p>
+        </div>
+    </div>
+    <div class="footer">
+        Copyright &copy; 2018
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+var movies = [[${movies}]];
+function getMovie(index) {
+    displaySelectedMovie(index, movies[index])
+}
+/*]]>*/
+</script>
 </body>
 </html>

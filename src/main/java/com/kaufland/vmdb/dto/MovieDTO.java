@@ -22,6 +22,8 @@ public class MovieDTO {
 
     private float rating;
 
+    private String poster;
+
     public MovieDTO(Movie movie) {
         this.id = movie.getId();
         this.title = movie.getTitle();
@@ -30,6 +32,7 @@ public class MovieDTO {
         this.genres = movie.getGenres().stream().map(e -> e.getName()).toArray(String[]::new);
         this.plot = movie.getPlot();
         this.rating = (float) movie.getRatingCombined() / movie.getRatings();
+        this.poster = movie.getPosterUrl();
     }
 
     public long getId() {
@@ -86,5 +89,13 @@ public class MovieDTO {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 }
