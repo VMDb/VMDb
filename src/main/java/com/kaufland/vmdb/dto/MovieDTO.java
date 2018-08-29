@@ -4,7 +4,6 @@ import com.kaufland.vmdb.domain.Movie;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.temporal.ChronoField;
 
 public class MovieDTO {
 

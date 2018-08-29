@@ -13,12 +13,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
+
+    private final Random random = new Random();
 
     @Autowired
     public MovieServiceImpl(MovieRepository movieRepository){
@@ -39,11 +42,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<MovieDTO> all() {
-        Pageable limit = PageRequest.of(0,20);
+    public List<MovieDTO> allInTheaters() {
+        long count = movieRepository.count();
+        int start = random.nextInt((int) count / 24);
+        Pageable limit = PageRequest.of(start, 24);
         Page<Movie> movies = movieRepository.findAll(limit);
-        movies.forEach(m -> m.getActors().size());
-
         return movies.stream().map(MovieDTO::new).collect(Collectors.toList());
 
     }

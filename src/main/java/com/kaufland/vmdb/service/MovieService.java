@@ -12,7 +12,7 @@ public interface MovieService {
 
     Movie getByID(long id);
 
-    List<MovieDTO> all();
+    List<MovieDTO> allInTheaters();
 
     List<Movie> getByKeyword(String keyword);
 

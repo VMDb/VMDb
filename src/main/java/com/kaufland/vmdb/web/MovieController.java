@@ -21,7 +21,7 @@ public class MovieController {
 
     @GetMapping("/")
     public String greeting(Model model) {
-        List<MovieDTO> movies = movieService.all();
+        List<MovieDTO> movies = movieService.allInTheaters();
         model.addAttribute("movies", movies);
         return "index";
     }

@@ -9,6 +9,7 @@ function displaySelectedMovie(index, movie) {
     currentMoviePoster = moviePoster
     moviePoster.style.transition = "1s all"
     moviePoster.style.opacity = "0"
+    moviePoster.style.cursor = "default"
     //returnSelectedMovie(currentMoviePoster)
     currentMoviePoster = moviePoster
     document.getElementsByClassName('selected-movie-image')[0].src = movie.poster
