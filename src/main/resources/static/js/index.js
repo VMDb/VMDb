@@ -1,48 +1,33 @@
 var currentMoviePoster = null;
 
-
-
 function displaySelectedMovie(index, movie) {
     console.log(movie)
     var moviePoster = document.getElementsByClassName('poster')[index];
+    if (moviePoster === currentMoviePoster) {
+        return
+    }
     returnSelectedMovie(currentMoviePoster)
     currentMoviePoster = moviePoster
-    moviePoster.style.transition = "1s all"
     moviePoster.style.opacity = "0"
     moviePoster.style.cursor = "default"
-    //returnSelectedMovie(currentMoviePoster)
     currentMoviePoster = moviePoster
-    document.getElementsByClassName('selected-movie-image')[0].src = movie.poster
-}
+    document.getElementsByClassName('selected-movie')[0].style.opacity = "0"
+    setTimeout(function () {
+        document.getElementsByClassName('selected-movie-image')[0].src = movie.poster
+        document.getElementsByClassName('selected-movie-title')[0].textContent = movie.title
+        document.getElementsByClassName('selected-movie-year')[0].textContent = movie.releaseYear
+        document.getElementsByClassName('selected-movie-duration')[0].textContent = "Duration: " + movie.duration
+        document.getElementsByClassName('selected-movie-rating')[0].textContent = movie.rating + " / 10"
+        document.getElementsByClassName('selected-movie-plot')[0].textContent = movie.plot
+        document.getElementsByClassName('selected-movie')[0].style.opacity = "1"
+    }, 200)
 
-function displaySelectedMovie2(index, movie) {
-    console.log(movie)
-    var moviePoster = document.getElementsByClassName('poster')[index];
-    returnSelectedMovie(currentMoviePoster)
-    currentMoviePoster = moviePoster
-    moviePoster.style['padding-top'] = "0"
-    moviePoster.style.right = window.innerWidth - moviePoster.getBoundingClientRect().right + "px"
-    moviePoster.style.width = moviePoster.clientWidth + "px"
-    moviePoster.style.height = moviePoster.clientHeight + "px"
-    moviePoster.style.transition = "1s all"
-    moviePoster.style.position = "absolute"
-    moviePoster.style['z-index'] = "5"
-    setTimeout(() => {
-        moviePoster.style.width = "300px"
-        moviePoster.style.height = "444px"
-        moviePoster.style.right = "100px"
-    }, 5)
 }
 
 function returnSelectedMovie(moviePoster) {
     if (moviePoster === null) {
         return
     }
-    moviePoster.style['padding-top'] = "148%"
-    moviePoster.style.right = "0"
-    moviePoster.style.width = "initial"
-    moviePoster.style.height = "initial"
-    moviePoster.style.position = "relative"
-    moviePoster.style['z-index'] = "0"
-    moviePoster.style.transition = "none"
+    moviePoster.style.opacity = "1"
+    moviePoster.style.cursor = "pointer"
 }
