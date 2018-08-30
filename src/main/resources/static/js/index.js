@@ -1,4 +1,5 @@
 var currentMoviePoster = null;
+document.getElementsByClassName('poster')[23].onclick()
 
 function displaySelectedMovie(index, movie) {
     console.log(movie)
@@ -15,6 +16,7 @@ function displaySelectedMovie(index, movie) {
     setTimeout(function () {
         document.getElementsByClassName('selected-movie-image')[0].src = movie.poster
         document.getElementsByClassName('selected-movie-title')[0].textContent = movie.title
+        document.getElementsByClassName('selected-movie-genres')[0].textContent = movie.genres;
         document.getElementsByClassName('selected-movie-year')[0].textContent = movie.releaseYear
         document.getElementsByClassName('selected-movie-duration')[0].textContent = "Duration: " + movie.duration
         document.getElementsByClassName('selected-movie-rating')[0].textContent = movie.rating ? movie.rating + " / 10" : "Not rated"

@@ -8,7 +8,9 @@ import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,23 +81,6 @@ public class Movie {
     }
 
     public Movie() {
-    }
-
-    public static Movie fromJSON(JSONObject object){
-        Movie movie = new Movie();
-        movie.title = object.getString("Title");
-        try {
-            movie.releaseDate = new SimpleDateFormat("dd MMM yyyy").parse(object.getString("Released")).toInstant();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        movie.duration = Integer.parseInt(object.getString("Runtime").split("\\s")[0]);
-        System.out.println(DatabaseInitializer.getInstance().getGenreRepository().findAllByName("Comedy")) ;
-        movie.genres.forEach(System.out::println);
-
-
-        return movie;
     }
 
     public void setPosterUrl(String posterUrl) {
@@ -233,6 +218,10 @@ public class Movie {
                 Objects.equals(plot, movie.plot) &&
                 Objects.equals(country, movie.country) &&
                 Objects.equals(comments, movie.comments);
+    }
+
+    public String getDate(){
+        return new DateTimeFormatterBuilder().appendPattern("dd MMMM, yyyy").toFormatter().withZone(ZoneId.of("UTC")).format(releaseDate);
     }
 
     @Override

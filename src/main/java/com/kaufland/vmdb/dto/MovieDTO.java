@@ -1,9 +1,11 @@
 package com.kaufland.vmdb.dto;
 
+import com.kaufland.vmdb.domain.Genre;
 import com.kaufland.vmdb.domain.Movie;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.stream.Collectors;
 
 public class MovieDTO {
 
@@ -15,9 +17,9 @@ public class MovieDTO {
 
     private short duration;
 
-    private String[] genres;
-
     private String plot;
+
+    private String genres;
 
     private float rating;
 
@@ -28,7 +30,7 @@ public class MovieDTO {
         this.title = movie.getTitle();
         this.releaseYear = (short) LocalDateTime.ofInstant(movie.getReleaseDate(), ZoneOffset.UTC).getYear();
         this.duration = (short) movie.getDuration();
-        this.genres = movie.getGenres().stream().map(e -> e.getName()).toArray(String[]::new);
+        this.genres = movie.getGenres().stream().map(Genre::getName).collect(Collectors.joining(", "));
         this.plot = movie.getPlot();
         this.rating = (movie.getRatings() == 0) ? 0 : (float) movie.getRatingCombined() / movie.getRatings();
         this.poster = movie.getPosterUrl();
@@ -66,11 +68,11 @@ public class MovieDTO {
         this.duration = duration;
     }
 
-    public String[] getGenres() {
+    public String getGenres() {
         return genres;
     }
 
-    public void setGenres(String[] genres) {
+    public void setGenres(String genres) {
         this.genres = genres;
     }
 

@@ -4,6 +4,7 @@
     <title>Avengers is THE BEST!!!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" type="image/png" th:href="@{/images/Kaufland_Logo.png}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
@@ -44,8 +45,8 @@
                 <h2 class="selected-movie-title"></h2>
                 <p class="selected-movie-year"></p>
                 <p class="selected-movie-duration"></p>
-                <p class="selected-movie-rating"></p>
                 <p class="selected-movie-genres"></p>
+                <p class="selected-movie-rating"></p>
                 <form class="movie-form" action="/">
                     <button class="button more-info">More info</button>
                 </form>
@@ -59,7 +60,6 @@
         Copyright &copy; 2018
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/index.js}"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
 
@@ -69,5 +69,6 @@ function getMovie(index) {
 }
 /*]]>*/
 </script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
 </body>
 </html>

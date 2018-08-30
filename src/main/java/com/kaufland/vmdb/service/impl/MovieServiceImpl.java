@@ -47,6 +47,7 @@ public class MovieServiceImpl implements MovieService {
         int start = random.nextInt((int) count / 24);
         Pageable limit = PageRequest.of(start, 24);
         Page<Movie> movies = movieRepository.findAll(limit);
+
         return movies.stream().map(MovieDTO::new).collect(Collectors.toList());
 
     }
