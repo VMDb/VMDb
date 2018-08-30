@@ -59,6 +59,7 @@ body, html {
 
 .search-button:hover {
     background: gray;
+    cursor: pointer;
 }
 
 .content {
@@ -78,7 +79,7 @@ body, html {
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 148%;
-    transition: opacity .4s;
+    transition: opacity .4s, transform .4s;
 }
 
 .poster:after {
@@ -97,6 +98,7 @@ body, html {
 
 .poster:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .poster:hover:after {
@@ -135,7 +137,8 @@ body, html {
     grid-template-rows: auto 1fr;
     height: 100%;
     transition: opacity .2s;
-    color: rgba(255, 255, 255, 0.88)
+    color: rgba(255, 255, 255, 0.88);
+    opacity: 0;
 }
 
 .selected-movie-image-wrapper {
@@ -153,6 +156,23 @@ body, html {
     grid-column: 2;
     grid-row: 1;
     padding: 5px 10px 0;
+    position: relative;
+}
+
+.more-info {
+    position: absolute;
+    width: 80%;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 5px;
+    font-size: 1.1em;
+    background-color: #ffb71c;
+    border: none;
+}
+
+.more-info:hover {
+    cursor: pointer;
 }
 
 .selected-movie-plot-wrapper {

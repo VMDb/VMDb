@@ -17,9 +17,10 @@ function displaySelectedMovie(index, movie) {
         document.getElementsByClassName('selected-movie-title')[0].textContent = movie.title
         document.getElementsByClassName('selected-movie-year')[0].textContent = movie.releaseYear
         document.getElementsByClassName('selected-movie-duration')[0].textContent = "Duration: " + movie.duration
-        document.getElementsByClassName('selected-movie-rating')[0].textContent = movie.rating + " / 10"
+        document.getElementsByClassName('selected-movie-rating')[0].textContent = movie.rating ? movie.rating + " / 10" : "Not rated"
         document.getElementsByClassName('selected-movie-plot')[0].textContent = movie.plot
         document.getElementsByClassName('selected-movie')[0].style.opacity = "1"
+        document.getElementsByClassName('movie-form')[0].action = "/movies/" + movie.id
     }, 200)
 
 }

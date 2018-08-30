@@ -30,7 +30,7 @@ public class MovieDTO {
         this.duration = (short) movie.getDuration();
         this.genres = movie.getGenres().stream().map(e -> e.getName()).toArray(String[]::new);
         this.plot = movie.getPlot();
-        this.rating = (float) movie.getRatingCombined() / movie.getRatings();
+        this.rating = (movie.getRatings() == 0) ? 0 : (float) movie.getRatingCombined() / movie.getRatings();
         this.poster = movie.getPosterUrl();
     }
 
