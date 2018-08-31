@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/movie.css}">
+</head>
+<body>
+
+
+<div class="header">
+    <img th:src="@{/images/Kaufland_Logo.png}" class="website-logo">
+    <div class="tab">
+        <p>In theaters</p>
+    </div>
+    <div class="tab">
+        <p>Movies</p>
+    </div>
+    <div class="tab">
+        <p>Actors</p>
+    </div>
+    <div class="search tab">
+        <input type="search" class="search-field">
+        <input type="submit" value="&#x1F50E;" class="search-button">
+    </div>
+</div>
+<div class="content">
+    <img class="movie-poster" th:src="${movie.posterUrl}"/>
+    <h1 class="title" th:text="${movie.title}"></h1>
+    <h1 class="year" th:text="${movie.getDate()}"></h1>
+</div>
+
+
+</body>
+</html>
