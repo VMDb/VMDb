@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 public class OmdbAccess {
 
-    public static JSONObject queryMovieByTitle(String title){
+    public static JSONObject queryMovieByTitle(String title) {
         String url = "https://www.omdbapi.com/?apikey=53f133e4&t=";
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(url + title.replaceAll("\\s","+").replaceAll("'", "%27")).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URL(url + title.replaceAll("\\s", "+").replaceAll("'", "%27")).openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String json = reader.lines().collect(Collectors.joining());
             return new JSONObject(json);
@@ -26,10 +26,10 @@ public class OmdbAccess {
         return null;
     }
 
-    public static JSONObject queryMovieById(String id){
+    public static JSONObject queryMovieById(String id) {
         String url = "https://www.omdbapi.com/?apikey=53f133e4&i=";
         try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(url+id).openConnection();
+            HttpURLConnection connection = (HttpURLConnection) new URL(url + id).openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String json = reader.lines().collect(Collectors.joining());
             return new JSONObject(json);
