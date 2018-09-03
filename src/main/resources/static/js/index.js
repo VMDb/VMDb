@@ -38,7 +38,7 @@ function displaySelectedMovie(index, movie) {
             document.getElementsByClassName('movie-form')[0].action = "/movies/" + movie.id
         }, 200)
     } else {
-        window.location.replace("/movies/" + movie.id)
+        window.location.href = "/movies/" + movie.id
     }
 }
 

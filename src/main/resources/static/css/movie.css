@@ -23,3 +23,11 @@ body {
     text-align: center;
     color: white;
 }
+
+@media only screen and (max-width: 767px) {
+    .movie-poster {
+        display: block;
+        margin: 10px auto;
+        float: none;
+    }
+}
