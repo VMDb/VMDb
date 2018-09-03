@@ -49,11 +49,11 @@
     transform: scale(1.05);
 }
 
-.poster:hover:after {
+.poster:not(.selected):hover:after {
     opacity:1;
 }
 
-.poster:hover .poster-info {
+.poster:not(.selected):hover .poster-info {
     visibility: visible;
     opacity: 1;
 }

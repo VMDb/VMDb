@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Avengers is THE BEST!!!</title>
+    <title>VMDB</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" type="image/png" th:href="@{/images/Kaufland_Logo.png}"/>
     <link rel="stylesheet" th:href="@{/css/header.css}">
@@ -11,19 +11,23 @@
 
 <div class="container">
     <div class="header">
-        <img th:src="@{/images/Kaufland_Logo.png}" class="website-logo">
-        <div class="tab">
-            <p>In theaters</p>
-        </div>
-        <div class="tab">
-            <p>Movies</p>
-        </div>
-        <div class="tab">
-            <p>Actors</p>
-        </div>
-        <div class="search tab">
-            <input type="search" class="search-field">
-            <input type="submit" value="&#x1F50E;" class="search-button">
+        <a href="/">
+            <img th:src="@{/images/Kaufland_Logo.png}" class="website-logo">
+        </a>
+        <div class="tabs">
+            <div class="tab">
+                <p>In theaters</p>
+            </div>
+            <div class="tab">
+                <p>Movies</p>
+            </div>
+            <div class="tab">
+                <p>Actors</p>
+            </div>
+            <div class="search tab">
+                <input type="search" class="search-field">
+                <input type="submit" value="&#x1F50E;" class="search-button">
+            </div>
         </div>
     </div>
     <div class="content">

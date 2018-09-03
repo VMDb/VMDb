@@ -3,7 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${movie.title}"></title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/images/Kaufland_Logo.png}"/>
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/movie.css}">
 </head>
@@ -11,19 +12,23 @@
 
 
 <div class="header">
-    <img th:src="@{/images/Kaufland_Logo.png}" class="website-logo">
-    <div class="tab">
-        <p>In theaters</p>
-    </div>
-    <div class="tab">
-        <p>Movies</p>
-    </div>
-    <div class="tab">
-        <p>Actors</p>
-    </div>
-    <div class="search tab">
-        <input type="search" class="search-field">
-        <input type="submit" value="&#x1F50E;" class="search-button">
+    <a href="/">
+        <img th:src="@{/images/Kaufland_Logo.png}" class="website-logo">
+    </a>
+    <div class="tabs">
+        <div class="tab">
+            <p>In theaters</p>
+        </div>
+        <div class="tab">
+            <p>Movies</p>
+        </div>
+        <div class="tab">
+            <p>Actors</p>
+        </div>
+        <div class="search tab">
+            <input type="search" class="search-field">
+            <input type="submit" value="&#x1F50E;" class="search-button">
+        </div>
     </div>
 </div>
 <div class="content">
