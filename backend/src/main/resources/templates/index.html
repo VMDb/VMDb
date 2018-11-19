@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>VMDB</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" th:href="@{/images/Kaufland_Logo.png}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <a href="/">
+            <img th:src="@{/images/Kaufland_Logo.png}" class="website-logo">
+        </a>
+        <div class="tabs">
+            <div class="tab">
+                <p>In theaters</p>
+            </div>
+            <div class="tab">
+                <p>Movies</p>
+            </div>
+            <div class="tab">
+                <p>Actors</p>
+            </div>
+            <div class="search tab">
+                <input type="search" class="search-field">
+                <input type="submit" value="&#x1F50E;" class="search-button">
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div th:each="movie, iter: ${movies}" class="poster" th:style="'background-image: url(' + ${movie.poster} + ');'" th:onclick="'getMovie(\'' + ${iter.index} + '\');'">
+
+            <div class="poster-info">
+                <h3 th:text="${movie.title}"></h3>
+                <p th:text="${movie.releaseYear}"></p>
+                <p th:text="${movie.rating == 0.0} ? 'Not rated' : ${movie.rating}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="top-sidebar">
+        <div class="selected-movie">
+            <div class="selected-movie-image-wrapper">
+                <img class="selected-movie-image">
+            </div>
+            <div class="selected-movie-info">
+                <h2 class="selected-movie-title"></h2>
+                <p class="selected-movie-year"></p>
+                <p class="selected-movie-duration"></p>
+                <p class="selected-movie-genres"></p>
+                <p class="selected-movie-rating"></p>
+                <form class="movie-form" action="/">
+                    <button class="button more-info">More info</button>
+                </form>
+            </div>
+            <div class="selected-movie-plot-wrapper">
+                <p class="selected-movie-plot"></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Copyright &copy; 2018
+    </div>
+</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+var movies = [[${movies}]];
+function getMovie(index) {
+    displaySelectedMovie(index, movies[index])
+}
+/*]]>*/
+</script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

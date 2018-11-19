@@ -1,0 +1,7 @@
+<p>
+  Movie Shared Component
+</p>
+
+<ul>
+  <li *ngFor="let movie of movies; let i = index" (click)="selectMovie(i)"> {{ movie.id + ':' + movie.name}}}</li>
+</ul>

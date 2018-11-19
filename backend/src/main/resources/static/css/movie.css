@@ -1,0 +1,33 @@
+body {
+    background-color: #121212;
+}
+
+.content{
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+}
+
+.movie-poster{
+    float: left;
+    margin: 10px;
+}
+
+.title{
+    text-align: center;
+    font-size: 3.6em;
+    color: white;
+}
+
+.year{
+    text-align: center;
+    color: white;
+}
+
+@media only screen and (max-width: 767px) {
+    .movie-poster {
+        display: block;
+        margin: 10px auto;
+        float: none;
+    }
+}
