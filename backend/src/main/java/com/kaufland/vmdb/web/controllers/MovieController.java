@@ -7,13 +7,11 @@ import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class MovieController {
 
     private MovieService movieService;
@@ -26,11 +24,10 @@ public class MovieController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/")
-    public String greeting(Model model) {
-        List<MovieDTO> movies = movieService.allInTheaters();
-        model.addAttribute("movies", movies);
-        return "index";
+    @GetMapping("/home")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<MovieDTO> greeting(Model model) {
+        return movieService.allInTheaters();
     }
 
     @GetMapping("/movies/{id}")

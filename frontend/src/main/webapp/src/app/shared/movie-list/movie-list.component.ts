@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Movie } from './movie'
 
+import { MovieService } from '../movie/movie.service';
+
 @Component({
   selector: 'movie-list',
   templateUrl: './movie-list.component.html',
@@ -8,18 +10,19 @@ import { Movie } from './movie'
 })
 export class MovieListComponent implements OnInit {
 
-  @Input()
-  private movies: Movie[] = []
+  movies: Array<any>;
 
   @Output()
   private onSelect: EventEmitter<Movie> = new EventEmitter()
 
-  constructor() {
-    this.movies.push(new Movie(1, 'Manchester by the sea'))
-    this.movies.push(new Movie(1, 'Hotel budapest'))
+  constructor(private movieService: MovieService) {
+  
   }
 
   ngOnInit() {
+  this.movieService.getAll().subscribe(data => {
+      this.movies = data;
+    });
   }
 
   public selectMovie(index: number) {

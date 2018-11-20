@@ -1,7 +1,56 @@
-<p>
-  Movie Shared Component
-</p>
 
-<ul>
-  <li *ngFor="let movie of movies; let i = index" (click)="selectMovie(i)"> {{ movie.id + ':' + movie.name}}}</li>
-</ul>
+<div class="container">
+  <div class="header">
+    <a href="/">
+      <img src="../../../assets/images/Kaufland_Logo.png" class="website-logo">
+    </a>
+    <div class="tabs">
+      <div class="tab">
+        <p>In theaters</p>
+      </div>
+      <div class="tab">
+        <p>Movies</p>
+      </div>
+      <div class="tab">
+        <p>Actors</p>
+      </div>
+      <div class="search tab">
+        <input type="search" class="search-field">
+        <input type="submit" value="&#x1F50E;" class="search-button">
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div *ngFor="let movie of movies" class="poster" [ngStyle]="'background-image: url(' +movie.poster + ');'" ng-click="alert(movie.title)">
+
+        <div class="poster-info">
+            <h3>{{movie.title}}</h3>
+            <p>{{movie.releaseYear}}</p>
+            <p>{{movie.rating == 0.0}} ? 'Not rated' : {{movie.rating}}</p>
+        </div>
+    </div>
+</div>
+<div class="top-sidebar">
+  <div class="selected-movie">
+      <div class="selected-movie-image-wrapper">
+          <img class="selected-movie-image">
+      </div>
+      <div class="selected-movie-info">
+          <h2 class="selected-movie-title"></h2>
+          <p class="selected-movie-year"></p>
+          <p class="selected-movie-duration"></p>
+          <p class="selected-movie-genres"></p>
+          <p class="selected-movie-rating"></p>
+          <form class="movie-form" action="/">
+              <button class="button more-info">More info</button>
+          </form>
+      </div>
+      <div class="selected-movie-plot-wrapper">
+          <p class="selected-movie-plot"></p>
+      </div>
+  </div>
+</div>
+<div class="footer">
+  Copyright &copy; 2018
+</div>
+</div>
