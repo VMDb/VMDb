@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/observable'
+import { Observable } from 'rxjs/observable';
+import { Movie } from '../movie-list/movie';
 
 @Injectable()
 export class MovieService {
@@ -11,7 +12,7 @@ export class MovieService {
     this.http = http;
   }
 
-  getAll(): Observable<any> {
-    return this.http.get('//localhost:8080/home');
+  getAll(): Observable<Movie[]> {
+    return this.http.get<Movie[]>("http://localhost:8080/home");
   }
 }

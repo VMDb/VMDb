@@ -1,5 +1,6 @@
 
-<div class="container">
+
+<div class="container" ng-app="app">
   <div class="header">
     <a href="/">
       <img src="../../../assets/images/Kaufland_Logo.png" class="website-logo">
@@ -20,13 +21,13 @@
       </div>
     </div>
   </div>
-  <div class="content">
-    <div *ngFor="let movie of movies" class="poster" [ngStyle]="'background-image: url(' +movie.poster + ');'" ng-click="alert(movie.title)">
+  <div class="content" ng-controller="testController">
+    <div *ngFor="let movie of movies; let i = index" [attr.data-index]="i" class="poster" [style.backgroundImage]="'url('+movie.poster+')'" ng-click="selectMovie(i)">
 
         <div class="poster-info">
             <h3>{{movie.title}}</h3>
             <p>{{movie.releaseYear}}</p>
-            <p>{{movie.rating == 0.0}} ? 'Not rated' : {{movie.rating}}</p>
+            <p>{{movie.rating == 0.0 ? 'Not rated' : movie.rating}} </p>
         </div>
     </div>
 </div>

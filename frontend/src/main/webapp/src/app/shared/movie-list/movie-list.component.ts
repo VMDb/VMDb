@@ -10,13 +10,16 @@ import { MovieService } from '../movie/movie.service';
 })
 export class MovieListComponent implements OnInit {
 
-  movies: Array<any>;
+  movies: Movie[];
 
   @Output()
   private onSelect: EventEmitter<Movie> = new EventEmitter()
 
   constructor(private movieService: MovieService) {
-  
+    this.movies = [];
+    this.onSelect.subscribe(movie => {
+      alert(1)
+    });
   }
 
   ngOnInit() {

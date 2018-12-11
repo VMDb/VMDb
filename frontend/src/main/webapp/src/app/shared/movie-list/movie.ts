@@ -1,11 +1,31 @@
 export class Movie {
 
-  private id: number
+  public id: number
 
-  private name: string
+  public title: string
 
-  constructor(id: number, name: string) {
+  public releaseYear: number
+
+  public duration: number
+
+  public plot: string
+
+  public genres: string
+
+  public rating: number
+
+  public poster: string
+
+  constructor(id: number, title: string, releaseYear: number, duration: number, plot: string, genres: string, rating: number, poster: string) {
     this.id = id
-    this.name = name
+    this.title = title
+    this.releaseYear = releaseYear
+    this.duration = duration
+    this.plot = plot
+    this.genres = genres
+    this.rating = rating
+    this.poster = poster
   }
+
+
 }
