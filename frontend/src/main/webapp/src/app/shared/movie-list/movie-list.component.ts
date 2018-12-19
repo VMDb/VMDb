@@ -10,7 +10,10 @@ import { MovieService } from '../movie/movie.service';
 })
 export class MovieListComponent implements OnInit {
 
-  movies: Movie[];
+  movies: Movie[]
+
+  // TODO: Assigne movie when you select one.
+  selectedMovie: Movie
 
   @Output()
   private onSelect: EventEmitter<Movie> = new EventEmitter()

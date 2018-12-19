@@ -2,7 +2,7 @@ var currentMoviePoster = null;
 if (window.innerWidth > 767) {
     document.getElementsByClassName('poster')[0].onclick()
 }
-
+// TODO Move it to media queries.
 window.addEventListener('resize', function(event){
   if (window.innerWidth > 767 && currentMoviePoster === null) {
       document.getElementsByClassName('poster')[0].onclick()
@@ -13,6 +13,7 @@ window.addEventListener('resize', function(event){
   }
 });
 
+/* TODO: We are going to replace this with [class.selectedMovie] */
 function displaySelectedMovie(index, movie) {
     if (window.innerWidth > 767) {
         var moviePoster = document.getElementsByClassName('poster')[index];
@@ -42,6 +43,7 @@ function displaySelectedMovie(index, movie) {
     }
 }
 
+// TODO: This wont be transferred.
 function returnSelectedMovie(moviePoster) {
     if (moviePoster === null) {
         return
