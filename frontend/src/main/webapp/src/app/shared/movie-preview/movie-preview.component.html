@@ -1,0 +1,23 @@
+
+<div *ngIf="movie" class="top-sidebar">
+  <div class="selected-movie">
+    <div class="selected-movie-image-wrapper">
+      <img class="selected-movie-image">
+    </div>
+    <!-- TODO: Use the selectedMovie from the component -->
+    <div class="selected-movie-info">
+      <!-- Use this type of interpolation. -->
+      <h2 class="selected-movie-title"> {{ movie?.title }}</h2>
+      <p class="selected-movie-year">   {{movie?.releaseYear}}</p>
+      <p class="selected-movie-duration"></p>
+      <p class="selected-movie-genres"></p>
+      <p class="selected-movie-rating"></p>
+      <form class="movie-form" action="/">
+        <button class="button more-info">More info</button>
+      </form>
+    </div>
+    <div class="selected-movie-plot-wrapper">
+      <p class="selected-movie-plot"></p>
+    </div>
+  </div>
+</div>

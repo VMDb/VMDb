@@ -1,1 +1,5 @@
 <!-- TODO: Add movie html into this component. -->
+<div class="content">
+<movie-list (onSelect)="selectMovie($event)"></movie-list>
+<movie-preview [movie]="this.movie"></movie-preview>
+</div>

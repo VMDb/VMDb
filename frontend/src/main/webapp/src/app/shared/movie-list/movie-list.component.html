@@ -23,7 +23,7 @@
   </div>
   <div class="content" ng-controller="testController">
     <!--TODO: Use (click) instead of ng-click -->
-    <div *ngFor="let movie of movies; let i = index" [attr.data-index]="i" class="poster" [style.backgroundImage]="'url('+movie.poster+')'" ng-click="selectMovie(i)">
+    <div *ngFor="let movie of movies;" class="poster" [style.backgroundImage]="'url('+movie.poster+')'" (click)="selectMovie(movie)">
 
         <!-- TODO: Move this into separate component and reuse it. For example <movie [class.selectedMovie]='movie === selectedMovie'> </movie> -->
         <div class="poster-info">
@@ -33,28 +33,7 @@
         </div>
     </div>
 </div>
-<div class="top-sidebar">
-  <div class="selected-movie">
-      <div class="selected-movie-image-wrapper">
-          <img class="selected-movie-image">
-      </div>
-    <!-- TODO: Use the selectedMovie from the component -->
-      <div class="selected-movie-info">
-          <!-- Use this type of interpolation. -->
-          <h2 class="selected-movie-title"> {{ selectedMovie?.title }}</h2>
-          <p class="selected-movie-year"></p>
-          <p class="selected-movie-duration"></p>
-          <p class="selected-movie-genres"></p>
-          <p class="selected-movie-rating"></p>
-          <form class="movie-form" action="/">
-              <button class="button more-info">More info</button>
-          </form>
-      </div>
-      <div class="selected-movie-plot-wrapper">
-          <p class="selected-movie-plot"></p>
-      </div>
-  </div>
-</div>
+
 <div class="footer">
   Copyright &copy; 2018
 </div>

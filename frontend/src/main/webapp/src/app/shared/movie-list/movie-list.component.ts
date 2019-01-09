@@ -21,7 +21,7 @@ export class MovieListComponent implements OnInit {
   constructor(private movieService: MovieService) {
     this.movies = [];
     this.onSelect.subscribe(movie => {
-      alert(1)
+
     });
   }
 
@@ -31,9 +31,9 @@ export class MovieListComponent implements OnInit {
     });
   }
 
-  public selectMovie(index: number) {
-    const selectedMovie = this.movies[index]
-    this.onSelect.emit(selectedMovie)
+  public selectMovie(movie: Movie) {
+    this.selectedMovie = movie;
+    this.onSelect.emit(movie);
   }
 
 }

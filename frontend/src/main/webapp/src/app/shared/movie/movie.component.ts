@@ -9,6 +9,10 @@ import { Component } from '@angular/core'
 })
 export class MovieComponent {
 
-  movie: Movie
+  movie: Movie;
+
+  public selectMovie(movie: Movie){
+    this.movie = movie;
+  }
 
 }
