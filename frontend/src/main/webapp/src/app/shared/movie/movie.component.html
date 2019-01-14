@@ -1,5 +1,29 @@
 <!-- TODO: Add movie html into this component. -->
-<div class="content">
-<movie-list (onSelect)="selectMovie($event)"></movie-list>
-<movie-preview [movie]="this.movie"></movie-preview>
+<div class="container" ng-app="app">
+  <div class="header">
+    <a href="/">
+      <img src="../../../assets/images/Kaufland_Logo.png" class="website-logo">
+    </a>
+    <div class="tabs">
+      <div class="tab">
+        <p>In theaters</p>
+      </div>
+      <div class="tab">
+        <p>Movies</p>
+      </div>
+      <div class="tab">
+        <p>Actors</p>
+      </div>
+      <div class="search tab">
+        <input type="search" class="search-field">
+        <input type="submit" value="&#x1F50E;" class="search-button">
+      </div>
+    </div>
+  </div>
+  <movie-list (onSelect)="selectMovie($event)"></movie-list>
+  <movie-preview [movie]="this.movie"></movie-preview>
+
+  <div class="footer">
+    Copyright &copy; 2018
+  </div>
 </div>

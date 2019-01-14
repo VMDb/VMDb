@@ -1,29 +1,5 @@
 
-
-<div class="container" ng-app="app">
-  <div class="header">
-    <a href="/">
-      <img src="../../../assets/images/Kaufland_Logo.png" class="website-logo">
-    </a>
-    <div class="tabs">
-      <div class="tab">
-        <p>In theaters</p>
-      </div>
-      <div class="tab">
-        <p>Movies</p>
-      </div>
-      <div class="tab">
-        <p>Actors</p>
-      </div>
-      <div class="search tab">
-        <input type="search" class="search-field">
-        <input type="submit" value="&#x1F50E;" class="search-button">
-      </div>
-    </div>
-  </div>
-  <div class="content" ng-controller="testController">
-    <!--TODO: Use (click) instead of ng-click -->
-    <div *ngFor="let movie of movies;" class="poster" [style.backgroundImage]="'url('+movie.poster+')'" (click)="selectMovie(movie)">
+<div *ngFor="let movie of movies;" class="poster" [class.selected]="selectedMovie == movie" [style.backgroundImage]="'url('+movie.poster+')'" (click)="selectMovie(movie)">
 
         <!-- TODO: Move this into separate component and reuse it. For example <movie [class.selectedMovie]='movie === selectedMovie'> </movie> -->
         <div class="poster-info">
@@ -31,10 +7,4 @@
             <p>{{movie.releaseYear}}</p>
             <p>{{movie.rating == 0.0 ? 'Not rated' : movie.rating}} </p>
         </div>
-    </div>
-</div>
-
-<div class="footer">
-  Copyright &copy; 2018
-</div>
 </div>
