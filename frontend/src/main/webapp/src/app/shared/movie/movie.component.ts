@@ -13,6 +13,7 @@ export class MovieComponent {
 
   public selectMovie(movie: Movie){
     this.movie = movie;
+    
   }
 
 }
