@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common'
 import { MovieService } from './shared/movie/movie.service';
 import { MoviePreviewComponent } from './shared/movie-preview/movie-preview.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { CreateMovieComponent } from './create-movie/create-movie.component';
 
 
 
@@ -19,6 +20,7 @@ import { AppRoutingModule } from './/app-routing.module';
     AppComponent,
     MovieListComponent,
     MoviePreviewComponent,
+    CreateMovieComponent,
   ],
   imports: [
     BrowserModule,
