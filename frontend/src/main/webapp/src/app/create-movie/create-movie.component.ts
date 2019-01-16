@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieForm } from '../shared/model/movie-form';
 
 @Component({
   selector: 'app-create-movie',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateMovieComponent implements OnInit {
 
-  constructor() { }
+  private movieForm: MovieForm
+
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
 
+  submit(){
+    console.log(this.movieForm);
+  }
 }
