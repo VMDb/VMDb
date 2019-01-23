@@ -11,14 +11,9 @@ export class CreateMovieComponent implements OnInit {
 
   movieForm: MovieForm
 
-  title: string;
-
-  duration: number;
-
-  releaseDate: Date;
-
   constructor(private movieService: MovieService) {
-    
+    //Not my proudest line of code..
+    this.movieForm = new MovieForm(null,null,null,null,null,null,null,null,null,null,null,null,null);
   }
 
   ngOnInit() {
@@ -26,7 +21,7 @@ export class CreateMovieComponent implements OnInit {
 
   submit(){
     //Test
-    this.movieForm = new MovieForm(this.title, this.releaseDate, this.duration, null, null, null, null, null, null, null, null, null, null);
+
     console.log(this.movieForm);
     this.movieService.save(this.movieForm);
   }
