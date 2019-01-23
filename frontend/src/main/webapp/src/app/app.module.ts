@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MovieListComponent } from './shared/movie-list/movie-list.component';
 import { MovieComponent } from './shared/movie/movie.component';
@@ -26,7 +26,8 @@ import { CreateMovieComponent } from './shared/create-movie/create-movie.compone
     BrowserModule,
     HttpClientModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [MovieService],
   bootstrap: [AppComponent]

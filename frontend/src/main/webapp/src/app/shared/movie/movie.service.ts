@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Movie } from '../movie-list/movie';
+import { MovieForm } from '../model/movie';
 
 @Injectable()
 export class MovieService {
@@ -10,6 +11,12 @@ export class MovieService {
 
   constructor(http: HttpClient) {
     this.http = http;
+  }
+
+  save(movieForm: MovieForm){
+    console.log("here")
+    //doesn't work atm
+    this.http.post("http://localhost:8080/save-movie", movieForm).subscribe();
   }
 
   getAll(): Observable<Movie[]> {

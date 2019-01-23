@@ -5,6 +5,8 @@ import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.service.CommentService;
 import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,20 @@ public class MovieController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/home")
+    @RequestMapping(value = "/save-movie",
+                    method = RequestMethod.POST,
+                    consumes = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity saveMovie(@RequestBody Movie movie){
+        movieService.addMovie(movie);
+        return ResponseEntity.ok("Movie Saved!");
+    }
+
+    @RequestMapping(value = "/home",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<MovieDTO> greeting(Model model) {
+    public List<MovieDTO> greeting() {
         return movieService.allInTheaters();
     }
 

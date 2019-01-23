@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieForm } from '../model/movie-form';
+import { MovieForm } from '../model/movie';
+import { MovieService } from '../movie/movie.service';
 
 @Component({
   selector: 'app-create-movie',
@@ -8,9 +9,15 @@ import { MovieForm } from '../model/movie-form';
 })
 export class CreateMovieComponent implements OnInit {
 
-  private movieForm: MovieForm
+  movieForm: MovieForm
 
-  constructor() {
+  title: string;
+
+  duration: number;
+
+  releaseDate: Date;
+
+  constructor(private movieService: MovieService) {
     
   }
 
@@ -18,6 +25,9 @@ export class CreateMovieComponent implements OnInit {
   }
 
   submit(){
+    //Test
+    this.movieForm = new MovieForm(this.title, this.releaseDate, this.duration, null, null, null, null, null, null, null, null, null, null);
     console.log(this.movieForm);
+    this.movieService.save(this.movieForm);
   }
 }

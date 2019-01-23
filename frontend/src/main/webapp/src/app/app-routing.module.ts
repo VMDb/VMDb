@@ -8,7 +8,7 @@ import { CreateMovieComponent } from '../app/shared/create-movie/create-movie.co
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: MovieComponent },
     { path: 'movie/new', component: CreateMovieComponent }
 ];
