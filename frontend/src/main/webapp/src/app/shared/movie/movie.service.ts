@@ -23,4 +23,8 @@ export class MovieService {
     // TODO: The endpoint should be /movies. Check this https://restfulapi.net/resource-naming/
     return this.http.get<Movie[]>("http://localhost:8080/home");
   }
+
+  getMovie(id: number): Observable<MovieForm>{
+    return this.http.get<MovieForm>("http://localhost:8080/movies/"+id);
+  }
 }

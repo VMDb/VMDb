@@ -2,6 +2,8 @@ export class Movie {
 
   // TODO: there is a shrot syntax for having fields but declaraing them in the constructor. For example constructor(public id: number...)
   // TODO: Remove the fields.
+  public id: number;
+
   public title: string
 
   public releaseYear: number
