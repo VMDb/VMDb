@@ -1,2 +1,7 @@
 import { Human } from "./human";
-export class Actor extends Human{}
+import { Country } from "./country";
+export class Actor extends Human{
+  constructor(public name: string, public country: Country, public dateOfBirth: Date, public careerStart: Date){
+    super(name, country, dateOfBirth, careerStart);
+  }
+}
