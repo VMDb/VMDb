@@ -44,11 +44,19 @@ public class MovieController {
         return movieService.allInTheaters();
     }
 
-    @GetMapping("/movies/{id}")
-    public String getMovie(@PathVariable Long id, Model model){
-        Movie movie = movieService.getByID(id);
-        model.addAttribute("movie", movie);
-        model.addAttribute("comments", commentService.getByMovie(movie, 0));
-        return "view_movie";
+//    @GetMapping("/movies/{id}")
+//    public String getMovie(@PathVariable Long id, Model model){
+//        Movie movie = movieService.getByID(id);
+//        model.addAttribute("movie", movie);
+//        model.addAttribute("comments", commentService.getByMovie(movie, 0));
+//        return "view_movie";
+//    }
+
+    @RequestMapping(value = "/movies/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Movie getMovie(@PathVariable Long id) {
+        return movieService.getByID(id);
     }
 }
