@@ -22,5 +22,5 @@
 <div *ngIf="movie" class="content">
     <img [attr.src]="movie.posterUrl" class="movie-poster"/>
     <h1 class="title">{{movie.title}}</h1>
-    <h1 class="year" >{{movie.releaseDate}}</h1>
+    <h1 class="year" >{{movie.releaseDate.getFullYear()}}</h1>
 </div>

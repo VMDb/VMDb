@@ -16,6 +16,8 @@ export class ViewMovieComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.movieService.getMovie(params.id).subscribe(mov => {
         this.movie = mov;
+        var date = new Date(this.movie.releaseDate);
+        this.movie.releaseDate = date;/*Required date copy and reassignment because JS*/
       });
     });
     

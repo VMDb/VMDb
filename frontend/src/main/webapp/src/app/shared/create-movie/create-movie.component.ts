@@ -60,6 +60,19 @@ export class CreateMovieComponent implements OnInit {
       {name: "USA"},
       {name: "Russia"}
     ]
+
+    movieService.getCrew("actor").subscribe(actorsIn => {
+      this.actors = actorsIn as Actor[];
+    });
+    movieService.getCrew("writer").subscribe(writersIn => {
+      this.writers = writersIn as Writer[];
+    });
+    movieService.getCrew("producer").subscribe(producersIn => {
+      this.producers = producersIn as Producer[];
+    });
+    movieService.getCrew("director").subscribe(directorsIn => {
+      this.directors = directorsIn as Director[];
+    });
   }
 
   ngOnInit() {
@@ -68,6 +81,7 @@ export class CreateMovieComponent implements OnInit {
   submit(){
     //Test
     console.log(this.movieForm);
+    //Doesn't work atm
     //this.movieService.save(this.movieForm);
   }
 }
