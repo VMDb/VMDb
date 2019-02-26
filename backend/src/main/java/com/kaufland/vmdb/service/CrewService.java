@@ -1,7 +1,7 @@
 package com.kaufland.vmdb.service;
 
 import com.kaufland.vmdb.domain.*;
-import com.kaufland.vmdb.dto.HumanDTO;
+import com.kaufland.vmdb.dto.HumanModel;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +26,7 @@ public interface CrewService {
         return null;
     }
 
-    default List<HumanDTO> findCrewByRoleNameDTO(String role){
-        return findCrewByRoleName(role).stream().map(HumanDTO::new).collect(Collectors.toList());
+    default List<HumanModel> findCrewByRoleNameDTO(String role){
+        return findCrewByRoleName(role).stream().map(HumanModel::new).collect(Collectors.toList());
     }
 }

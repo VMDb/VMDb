@@ -82,6 +82,6 @@ export class CreateMovieComponent implements OnInit {
     //Test
     console.log(this.movieForm);
     //Doesn't work atm
-    //this.movieService.save(this.movieForm);
+    this.movieService.save(this.movieForm);
   }
 }

@@ -15,4 +15,6 @@ public interface HumanRepository<T extends Human> extends NameSearchableReposito
     List<T> findAllByCountry    (Country country);
 
     List<T> findAllByCountryName(String name);
+
+    List<T> findAllByNameIn     (List<String> names);
 }
