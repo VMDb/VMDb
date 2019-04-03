@@ -6,24 +6,24 @@ import com.kaufland.vmdb.domain.Human;
 import javax.persistence.ManyToOne;
 import java.time.Instant;
 
-public class HumanDTO {
+public class HumanModel {
 
     private String name;
 
-    private String country;
+    private String countryName;
 
     private Instant dateOfBirth;
 
     private Instant careerStart;
 
-    public HumanDTO(Human human){
+    public HumanModel(Human human){
         this.name = human.getName();
-        this.country = human.getCountry().getName();
+        this.countryName = human.getCountry().getName();
         this.dateOfBirth = human.getDateOfBirth();
         this.careerStart = human.getCareerStart();
     }
 
-    public HumanDTO() {
+    public HumanModel() {
     }
 
     public String getName() {
@@ -35,11 +35,11 @@ public class HumanDTO {
     }
 
     public String getCountry() {
-        return country;
+        return countryName;
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.countryName = country;
     }
 
     public Instant getDateOfBirth() {
@@ -58,9 +58,9 @@ public class HumanDTO {
         this.careerStart = careerStart;
     }
 
-    public HumanDTO(String name, String country, Instant dateOfBirth, Instant careerStart) {
+    public HumanModel(String name, String country, Instant dateOfBirth, Instant careerStart) {
         this.name = name;
-        this.country = country;
+        this.countryName = country;
         this.dateOfBirth = dateOfBirth;
         this.careerStart = careerStart;
     }

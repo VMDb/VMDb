@@ -1,5 +1,6 @@
 package com.kaufland.vmdb.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kaufland.vmdb.domain.*;
 
 import javax.persistence.*;
@@ -18,17 +19,18 @@ public class MovieModel {
 
     private int duration;
 
-    private List<String> genres = new ArrayList<>();
-
-    private List<String> writers = new ArrayList<>();
-
-    private List<String> directors = new ArrayList<>();
-
-    private List<String> producers = new ArrayList<>();
-
-    private List<String> actors = new ArrayList<>();
-
-    private String country;
+    //@JsonProperty("genres.name")
+    private List<String> genresName = new ArrayList<>();
+    //@JsonProperty("writers.name")
+    private List<String> writersName = new ArrayList<>();
+    //@JsonProperty("directors.name")
+    private List<String> directorsName = new ArrayList<>();
+    //@JsonProperty("producers.name")
+    private List<String> producersName = new ArrayList<>();
+    //@JsonProperty("actors.name")
+    private List<String> actorsName = new ArrayList<>();
+    //@JsonProperty("country.name")
+    private String countryName;
 
     private List<String> comments = new ArrayList<>();
 
@@ -72,52 +74,52 @@ public class MovieModel {
         this.duration = duration;
     }
 
-    public List<String> getGenres() {
-        return genres;
+    public List<String> getGenresName() {
+        return genresName;
     }
 
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
+    public void setGenresName(List<String> genresName) {
+        this.genresName = genresName;
     }
 
-    public List<String> getWriters() {
-        return writers;
+    public List<String> getWritersName() {
+        return writersName;
     }
 
-    public void setWriters(List<String> writers) {
-        this.writers = writers;
+    public void setWritersName(List<String> writersName) {
+        this.writersName = writersName;
     }
 
-    public List<String> getDirectors() {
-        return directors;
+    public List<String> getDirectorsName() {
+        return directorsName;
     }
 
-    public void setDirectors(List<String> directors) {
-        this.directors = directors;
+    public void setDirectorsName(List<String> directorsName) {
+        this.directorsName = directorsName;
     }
 
-    public List<String> getProducers() {
-        return producers;
+    public List<String> getProducersName() {
+        return producersName;
     }
 
-    public void setProducers(List<String> producers) {
-        this.producers = producers;
+    public void setProducersName(List<String> producersName) {
+        this.producersName = producersName;
     }
 
-    public List<String> getActors() {
-        return actors;
+    public List<String> getActorsName() {
+        return actorsName;
     }
 
-    public void setActors(List<String> actors) {
-        this.actors = actors;
+    public void setActorsName(List<String> actorsName) {
+        this.actorsName = actorsName;
     }
 
-    public String getCountry() {
-        return country;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 
     public List<String> getComments() {
@@ -157,24 +159,6 @@ public class MovieModel {
     }
 
     public void setRatings(int ratings) {
-        this.ratings = ratings;
-    }
-
-    public MovieModel(long id, String title, Date releaseDate, int duration, List<String> genres, List<String> writers, List<String> directors, List<String> producers, List<String> actors, String country, List<String> comments, String plot, String posterUrl, double ratingCombined, int ratings) {
-        this.id = id;
-        this.title = title;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
-        this.genres = genres;
-        this.writers = writers;
-        this.directors = directors;
-        this.producers = producers;
-        this.actors = actors;
-        this.country = country;
-        this.comments = comments;
-        this.plot = plot;
-        this.posterUrl = posterUrl;
-        this.ratingCombined = ratingCombined;
         this.ratings = ratings;
     }
 

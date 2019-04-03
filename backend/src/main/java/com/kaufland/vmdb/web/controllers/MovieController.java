@@ -1,7 +1,7 @@
 package com.kaufland.vmdb.web.controllers;
 
 import com.kaufland.vmdb.domain.Movie;
-import com.kaufland.vmdb.dto.HumanDTO;
+import com.kaufland.vmdb.dto.HumanModel;
 import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.request.MovieModel;
 import com.kaufland.vmdb.service.CommentService;
@@ -23,13 +23,10 @@ public class MovieController {
 
     private final CommentService commentService;
 
-    private final CrewService crewService;
-
     @Autowired
-    public MovieController(MovieService movieService, CommentService commentService, CrewService crewService) {
+    public MovieController(MovieService movieService, CommentService commentService) {
         this.movieService = movieService;
         this.commentService = commentService;
-        this.crewService = crewService;
     }
 
     @RequestMapping(value = "/save-movie",
@@ -40,15 +37,6 @@ public class MovieController {
         movieService.addMovie(movieService.toMovie(movie));
         return ResponseEntity.created(URI.create("/movies/" + movie.getId())).body(movie);
     }
-
-    @RequestMapping(value = "/get-crew",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<HumanDTO>> getCrew(@RequestParam("role") String role){
-        return ResponseEntity.ok(crewService.findCrewByRoleNameDTO(role));
-    }
-
-
 
     @RequestMapping(value = "/home",
                     method = RequestMethod.GET,

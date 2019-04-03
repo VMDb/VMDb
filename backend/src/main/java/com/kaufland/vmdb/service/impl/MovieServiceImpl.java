@@ -4,8 +4,7 @@ import com.kaufland.vmdb.database.repo.MovieRepository;
 import com.kaufland.vmdb.domain.*;
 import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.request.MovieModel;
-import com.kaufland.vmdb.service.MovieInsertionService;
-import com.kaufland.vmdb.service.MovieService;
+import com.kaufland.vmdb.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,15 +19,25 @@ import java.util.stream.Collectors;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
+    private final CountryService countryService;
 
-    private final MovieInsertionService movieInsertionService;
+    private final ActorService actorService;
+    private final WriterService writerService;
+    private final DirectorService directorService;
+    private final ProducerService producerService;
+    private final GenreService genreService;
 
     private final Random random = new Random();
 
     @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository, MovieInsertionService movieInsertionService){
+    public MovieServiceImpl(MovieRepository movieRepository, CountryService countryService, ActorService actorService, WriterService writerService, DirectorService directorService, ProducerService producerService, GenreService genreService){
         this.movieRepository = movieRepository;
-        this.movieInsertionService = movieInsertionService;
+        this.countryService = countryService;
+        this.actorService = actorService;
+        this.writerService = writerService;
+        this.directorService = directorService;
+        this.producerService = producerService;
+        this.genreService = genreService;
     }
 
     @Override
@@ -69,17 +78,21 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie toMovie(MovieModel model){
         Movie movie = new Movie();
-        movie.setReleaseDate(model.getReleaseDate().toInstant());
+        movie.setCountry(countryService.getCountryFromName(model.getCountryName()));
         movie.setPlot(model.getPlot());
-        movie.setDuration(model.getDuration());
-        movie.setRatingCombined(model.getRatingCombined());
         movie.setTitle(model.getTitle());
-        movie.setCountry  (movieInsertionService.findCountryByName(model.getCountry()));
-        movie.setActors   (movieInsertionService.findCrewOfTypeAndNames(Actor.class, model.getActors()));
-        movie.setProducers(movieInsertionService.findCrewOfTypeAndNames(Producer.class, model.getProducers()));
-        movie.setDirectors(movieInsertionService.findCrewOfTypeAndNames(Director.class, model.getDirectors()));
-        movie.setWriters  (movieInsertionService.findCrewOfTypeAndNames(Writer.class, model.getWriters()));
-        movie.setGenres   (movieInsertionService.findGenresByNames(model.getGenres()));
+        movie.setRatingCombined(model.getRatingCombined());
+        movie.setReleaseDate(model.getReleaseDate().toInstant());
+        movie.setDuration(model.getDuration());
+        movie.setRatings(model.getRatings());
+        movie.setPosterUrl(model.getPosterUrl());
+
+        movie.setGenres(genreService.findGenresIn(model.getGenresName()));
+        movie.setActors(actorService.findByNameIn(model.getActorsName()));
+        movie.setProducers(producerService.findByNameIn(model.getActorsName()));
+        movie.setDirectors(directorService.findByNameIn(model.getActorsName()));
+        movie.setWriters(writerService.findByNameIn(model.getActorsName()));
+
         return movie;
     }
 

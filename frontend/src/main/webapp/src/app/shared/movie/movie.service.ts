@@ -20,8 +20,11 @@ export class MovieService {
     this.http.post("http://localhost:8080/save-movie", movieForm).subscribe();
   }
 
-  getCrew(role: string): Observable<Human[]>{
-    return this.http.get<Human[]>("http://localhost:8080/get-crew?role="+role);
+  getCrew(roleParam: string): Observable<Human[]>{
+    return this.http.get<Human[]>("http://localhost:8080/get-crew",{
+      params: {
+        role: roleParam
+      }});
   }
 
   getAll(): Observable<Movie[]> {
