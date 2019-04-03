@@ -1,6 +1,5 @@
 package com.kaufland.vmdb.web.controllers;
 
-import com.kaufland.vmdb.domain.Human;
 import com.kaufland.vmdb.domain.Movie;
 import com.kaufland.vmdb.dto.HumanDTO;
 import com.kaufland.vmdb.dto.MovieDTO;
@@ -13,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -36,9 +36,9 @@ public class MovieController {
                     method = RequestMethod.POST,
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity saveMovie(@RequestBody MovieModel movie){
+    public ResponseEntity saveMovie(@RequestBody MovieModel movie) {
         movieService.addMovie(movieService.toMovie(movie));
-        return ResponseEntity.ok("Movie Saved!");
+        return ResponseEntity.created(URI.create("/movies/" + movie.getId())).body(movie);
     }
 
     @RequestMapping(value = "/get-crew",
