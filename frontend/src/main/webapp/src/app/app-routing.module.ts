@@ -11,7 +11,7 @@ import { ViewMovieComponent } from './shared/view-movie/view-movie.component';
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: MovieComponent },
-    { path: 'view/:id', component: ViewMovieComponent },
+    { path: 'movies/:id', component: ViewMovieComponent },
     { path: 'movie/new', component: CreateMovieComponent }
 ];
 

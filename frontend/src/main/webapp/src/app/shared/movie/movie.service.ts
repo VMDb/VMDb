@@ -17,11 +17,11 @@ export class MovieService {
   save(movieForm: MovieForm){
     console.log("here")
     //doesn't work atm
-    this.http.post("http://localhost:8080/save-movie", movieForm).subscribe();
+    this.http.post("http://localhost:8080/movies", movieForm).subscribe();
   }
 
   getCrew(roleParam: string): Observable<Human[]>{
-    return this.http.get<Human[]>("http://localhost:8080/get-crew",{
+    return this.http.get<Human[]>("http://localhost:8080/crew",{
       params: {
         role: roleParam
       }});

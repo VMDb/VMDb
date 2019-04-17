@@ -33,7 +33,7 @@ public class CrewController {
     }
 
 
-    @RequestMapping(value = "/get-crew",
+    @RequestMapping(value = "/crew",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<HumanModel>> getCrew(@RequestParam("role") String role){

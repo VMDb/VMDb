@@ -1,11 +1,9 @@
 package com.kaufland.vmdb.web.controllers;
 
 import com.kaufland.vmdb.domain.Movie;
-import com.kaufland.vmdb.dto.HumanModel;
 import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.request.MovieModel;
 import com.kaufland.vmdb.service.CommentService;
-import com.kaufland.vmdb.service.CrewService;
 import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,7 +27,7 @@ public class MovieController {
         this.commentService = commentService;
     }
 
-    @RequestMapping(value = "/save-movie",
+    @RequestMapping(value = "/movies",
                     method = RequestMethod.POST,
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.TEXT_PLAIN_VALUE)
