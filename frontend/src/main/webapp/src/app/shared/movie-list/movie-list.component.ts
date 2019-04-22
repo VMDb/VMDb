@@ -10,13 +10,19 @@ import { MovieService } from '../movie/movie.service';
 })
 export class MovieListComponent implements OnInit {
 
-  movies: Array<any>;
+  movies: Movie[]
+
+  // TODO: Assigne movie when you select one.
+  selectedMovie: Movie
 
   @Output()
   private onSelect: EventEmitter<Movie> = new EventEmitter()
 
   constructor(private movieService: MovieService) {
-  
+    this.movies = [];
+    this.onSelect.subscribe(movie => {
+
+    });
   }
 
   ngOnInit() {
@@ -25,9 +31,9 @@ export class MovieListComponent implements OnInit {
     });
   }
 
-  public selectMovie(index: number) {
-    const selectedMovie = this.movies[index]
-    this.onSelect.emit(selectedMovie)
+  public selectMovie(movie: Movie) {
+    this.selectedMovie = movie;
+    this.onSelect.emit(movie);
   }
 
 }

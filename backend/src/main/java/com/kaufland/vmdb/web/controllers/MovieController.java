@@ -2,21 +2,24 @@ package com.kaufland.vmdb.web.controllers;
 
 import com.kaufland.vmdb.domain.Movie;
 import com.kaufland.vmdb.dto.MovieDTO;
+import com.kaufland.vmdb.request.MovieModel;
 import com.kaufland.vmdb.service.CommentService;
 import com.kaufland.vmdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class MovieController {
 
-    private MovieService movieService;
+    private final MovieService movieService;
 
-    private CommentService commentService;
+    private final CommentService commentService;
 
     @Autowired
     public MovieController(MovieService movieService, CommentService commentService) {
@@ -24,17 +27,36 @@ public class MovieController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/home")
+    @RequestMapping(value = "/movies",
+                    method = RequestMethod.POST,
+                    consumes = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity saveMovie(@RequestBody MovieModel movie) {
+        movieService.addMovie(movieService.toMovie(movie));
+        return ResponseEntity.created(URI.create("/movies/" + movie.getId())).body(movie);
+    }
+
+    @RequestMapping(value = "/home",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin(origins = "http://localhost:4200")
-    public List<MovieDTO> greeting(Model model) {
+    public List<MovieDTO> greeting() {
         return movieService.allInTheaters();
     }
 
-    @GetMapping("/movies/{id}")
-    public String getMovie(@PathVariable Long id, Model model){
-        Movie movie = movieService.getByID(id);
-        model.addAttribute("movie", movie);
-        model.addAttribute("comments", commentService.getByMovie(movie, 0));
-        return "view_movie";
+//    @GetMapping("/movies/{id}")
+//    public String getMovie(@PathVariable Long id, Model model){
+//        Movie movie = movieService.getByID(id);
+//        model.addAttribute("movie", movie);
+//        model.addAttribute("comments", commentService.getByMovie(movie, 0));
+//        return "view_movie";
+//    }
+
+    @RequestMapping(value = "/movies/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Movie getMovie(@PathVariable Long id) {
+        return movieService.getByID(id);
     }
 }

@@ -1,0 +1,26 @@
+<div class="header">
+  <a href="/">
+    <img src="../../../assets/images/Kaufland_Logo.png" class="website-logo">
+  </a>
+  <div class="tabs">
+    <div class="tab">
+      <p>In theaters</p>
+    </div>
+    <div class="tab">
+      <p>Movies</p>
+    </div>
+    <div class="tab">
+      <p>Actors</p>
+    </div>
+    <div class="search tab">
+      <input type="search" class="search-field">
+      <input type="submit" value="&#x1F50E;" class="search-button">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="movie" class="content">
+    <img [attr.src]="movie.posterUrl" class="movie-poster"/>
+    <h1 class="title">{{movie.title}}</h1>
+    <h1 class="year" >{{movie.releaseDate.getFullYear()}}</h1>
+</div>
