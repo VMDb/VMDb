@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MovieForm } from '../model/movie';
+import { MovieService } from '../movie/movie.service';
+import { ActivatedRoute } from '@angular/router';
 import { Genre } from '../model/genre';
 import { Actor } from '../model/actor';
 import { Writer } from '../model/writer';
 import { Director } from '../model/director';
 import { Producer } from '../model/producer';
 import { Country } from '../model/country';
-import { MovieService } from '../movie/movie.service';
 
 @Component({
-  selector: 'app-create-movie',
-  templateUrl: './create-movie.component.html',
-  styleUrls: ['./create-movie.component.css']
+  selector: 'app-update-movie',
+  templateUrl: './update-movie.component.html',
+  styleUrls: ['./update-movie.component.css']
 })
-export class CreateMovieComponent implements OnInit {
+export class UpdateMovieComponent implements OnInit {
 
+  id: number;
   movieForm: MovieForm
   genres: Genre[]
   actors: Actor[]
@@ -23,8 +25,13 @@ export class CreateMovieComponent implements OnInit {
   producers: Producer[]
   countries: Country[]
 
-  constructor(private movieService: MovieService) {
-    this.movieForm = new MovieForm();
+  constructor(private movieService: MovieService, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      this.movieService.getMovie(params.id).subscribe(movie => {
+        this.movieForm = movie;
+      });
+    });
 
     this.genres = [
       {name: "Horror"},
@@ -40,30 +47,6 @@ export class CreateMovieComponent implements OnInit {
       {name: "Thriller"},
       {name: "Western"},
       {name: "Animation"},
-    ]
-
-    this.actors = [
-      {name: "Arnold", country: null, dateOfBirth: null, careerStart: null},
-      {name: "Tom", country: null, dateOfBirth: null, careerStart: null},
-      {name: "Brat", country: null, dateOfBirth: null, careerStart: null}
-    ]
-
-    this.writers = [
-      {name: "John", country: null, dateOfBirth: null, careerStart: null},
-      {name: "Peter", country: null, dateOfBirth: null, careerStart: null},
-      {name: "Ivan", country: null, dateOfBirth: null, careerStart: null}
-    ]
-
-    this.directors = [
-      {name: "Ryan", country: null, dateOfBirth: null, careerStart: null},
-      {name: "JJ Abrams", country: null, dateOfBirth: null, careerStart: null},
-      {name: "Stefan", country: null, dateOfBirth: null, careerStart: null}
-    ]
-
-    this.producers = [
-      {name: "Leo", country: null, dateOfBirth: null, careerStart: null},
-      {name: "George", country: null, dateOfBirth: null, careerStart: null},
-      {name: "Michael", country: null, dateOfBirth: null, careerStart: null}
     ]
 
     this.countries = [
@@ -93,6 +76,6 @@ export class CreateMovieComponent implements OnInit {
     //Test
     console.log(this.movieForm);
     //Doesn't work atm
-    this.movieService.save(this.movieForm);
+    this.movieService.update(this.movieForm, this.id);
   }
 }

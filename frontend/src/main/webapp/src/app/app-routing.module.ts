@@ -6,13 +6,15 @@ import { MovieListComponent } from '../app/shared/movie-list/movie-list.componen
 import { MoviePreviewComponent } from '../app/shared/movie-preview/movie-preview.component';
 import { CreateMovieComponent } from '../app/shared/create-movie/create-movie.component';
 import { ViewMovieComponent } from './shared/view-movie/view-movie.component';
+import { UpdateMovieComponent } from './shared/update-movie/update-movie.component';
 
 
 const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: MovieComponent },
+    { path: '', redirectTo: '/movies', pathMatch: 'full' },
+    { path: 'movies', component: MovieComponent },
     { path: 'movies/:id', component: ViewMovieComponent },
-    { path: 'movie/new', component: CreateMovieComponent }
+    { path: 'movie/new', component: CreateMovieComponent },
+    { path: 'movie/update/:id', component: UpdateMovieComponent },
 ];
 
 @NgModule({

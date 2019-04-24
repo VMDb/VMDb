@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,6 +48,12 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Movie updateMovie(Movie movie) {
+        movieRepository.saveAndFlush(movie);
+        return movie;
+    }
+
+    @Override
     public Movie getByID(long id) {
         return movieRepository.findById(id)
                               .orElse(null);
@@ -76,8 +83,8 @@ public class MovieServiceImpl implements MovieService {
 
     //TODO
     @Override
-    public Movie toMovie(MovieModel model){
-        Movie movie = new Movie();
+    public Movie toMovie(MovieModel model, Supplier<Movie> movieSupplier){
+        Movie movie = movieSupplier.get();
         movie.setCountry(countryService.getCountryFromName(model.getCountryName()));
         movie.setPlot(model.getPlot());
         movie.setTitle(model.getTitle());

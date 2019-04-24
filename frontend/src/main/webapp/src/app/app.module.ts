@@ -12,6 +12,7 @@ import { MoviePreviewComponent } from './shared/movie-preview/movie-preview.comp
 import { AppRoutingModule } from './/app-routing.module';
 import { CreateMovieComponent } from './shared/create-movie/create-movie.component';
 import { ViewMovieComponent } from './shared/view-movie/view-movie.component';
+import { UpdateMovieComponent } from './shared/update-movie/update-movie.component';
 
 
 
@@ -22,7 +23,8 @@ import { ViewMovieComponent } from './shared/view-movie/view-movie.component';
     MovieListComponent,
     MoviePreviewComponent,
     CreateMovieComponent,
-    ViewMovieComponent
+    ViewMovieComponent,
+    UpdateMovieComponent
   ],
   imports: [
     BrowserModule,

@@ -32,14 +32,20 @@ public class MovieController {
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity saveMovie(@RequestBody MovieModel movie) {
-        movieService.addMovie(movieService.toMovie(movie));
+        movieService.addMovie(movieService.toMovie(movie, Movie::new));
         return ResponseEntity.created(URI.create("/movies/" + movie.getId())).body(movie);
     }
 
-    @RequestMapping(value = "/home",
+    @RequestMapping(value = "/movies",
+            method = RequestMethod.PUT)
+    public ResponseEntity updateMovie(@RequestBody MovieModel model, @RequestParam(name = "id") Integer movieId){
+        movieService.updateMovie(movieService.toMovie(model, () -> movieService.getByID(movieId)));
+        return ResponseEntity.ok(model);
+    }
+
+    @RequestMapping(value = "/movies",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins = "http://localhost:4200")
     public List<MovieDTO> greeting() {
         return movieService.allInTheaters();
     }
@@ -55,7 +61,6 @@ public class MovieController {
     @RequestMapping(value = "/movies/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins = "http://localhost:4200")
     public Movie getMovie(@PathVariable Long id) {
         return movieService.getByID(id);
     }

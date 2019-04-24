@@ -20,6 +20,10 @@ export class MovieService {
     this.http.post("http://localhost:8080/movies", movieForm).subscribe();
   }
 
+  update(movieForm: MovieForm, id: number){
+    this.http.put("http://localhost:8080/movies?id="+id, movieForm).subscribe();
+  }
+
   getCrew(roleParam: string): Observable<Human[]>{
     return this.http.get<Human[]>("http://localhost:8080/crew",{
       params: {
@@ -29,7 +33,7 @@ export class MovieService {
 
   getAll(): Observable<Movie[]> {
     // TODO: The endpoint should be /movies. Check this https://restfulapi.net/resource-naming/
-    return this.http.get<Movie[]>("http://localhost:8080/home");
+    return this.http.get<Movie[]>("http://localhost:8080/movies");
   }
 
   getMovie(id: number): Observable<MovieForm>{

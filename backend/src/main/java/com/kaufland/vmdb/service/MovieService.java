@@ -6,12 +6,15 @@ import com.kaufland.vmdb.dto.MovieDTO;
 import com.kaufland.vmdb.request.MovieModel;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public interface MovieService {
 
-    Movie toMovie(MovieModel model);
+    Movie toMovie(MovieModel model, Supplier<Movie> movieSupplier);
 
     MovieService addMovie(Movie movie);
+
+    Movie updateMovie(Movie movie);
 
     Movie getByID(long id);
 
