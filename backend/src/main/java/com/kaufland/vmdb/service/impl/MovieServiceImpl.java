@@ -42,16 +42,18 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public MovieService addMovie(Movie movie) {
-        movieRepository.save(movie);
+    public MovieService addMovie(MovieModel model) {
+        movieRepository.save(toMovie(model, Movie::new));
         return this;
     }
 
     @Override
-    public Movie updateMovie(Movie movie) {
-        movieRepository.saveAndFlush(movie);
+    public Movie updateMovie(MovieModel movieModel, Integer movieId) {
+        Movie movie = toMovie(movieModel, () -> movieRepository.getOne((long) movieId));
+        movieRepository.save(movie);
         return movie;
     }
+
 
     @Override
     public Movie getByID(long id) {

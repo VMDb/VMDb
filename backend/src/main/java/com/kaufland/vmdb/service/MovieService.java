@@ -12,9 +12,9 @@ public interface MovieService {
 
     Movie toMovie(MovieModel model, Supplier<Movie> movieSupplier);
 
-    MovieService addMovie(Movie movie);
+    MovieService addMovie(MovieModel movie);
 
-    Movie updateMovie(Movie movie);
+    Movie updateMovie(MovieModel movie, Integer movieId);
 
     Movie getByID(long id);
 

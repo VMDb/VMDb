@@ -27,24 +27,21 @@ public class MovieController {
         this.commentService = commentService;
     }
 
-    @RequestMapping(value = "/movies",
-                    method = RequestMethod.POST,
+    @PostMapping(value = "/movies",
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity saveMovie(@RequestBody MovieModel movie) {
-        movieService.addMovie(movieService.toMovie(movie, Movie::new));
+        movieService.addMovie(movie);
         return ResponseEntity.created(URI.create("/movies/" + movie.getId())).body(movie);
     }
 
-    @RequestMapping(value = "/movies",
-            method = RequestMethod.PUT)
-    public ResponseEntity updateMovie(@RequestBody MovieModel model, @RequestParam(name = "id") Integer movieId){
-        movieService.updateMovie(movieService.toMovie(model, () -> movieService.getByID(movieId)));
+    @PutMapping("/movies/{id}")
+    public ResponseEntity updateMovie(@RequestBody MovieModel model, @PathVariable(name = "id") Integer movieId){
+        movieService.updateMovie(model, movieId);
         return ResponseEntity.ok(model);
     }
 
-    @RequestMapping(value = "/movies",
-                    method = RequestMethod.GET,
+    @GetMapping(value = "/movies",
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MovieDTO> greeting() {
         return movieService.allInTheaters();
@@ -58,8 +55,7 @@ public class MovieController {
 //        return "view_movie";
 //    }
 
-    @RequestMapping(value = "/movies/{id}",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/movies/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Movie getMovie(@PathVariable Long id) {
         return movieService.getByID(id);

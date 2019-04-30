@@ -21,7 +21,7 @@ export class MovieService {
   }
 
   update(movieForm: MovieForm, id: number){
-    this.http.put("http://localhost:8080/movies?id="+id, movieForm).subscribe();
+    this.http.put("http://localhost:8080/movies/"+id, movieForm).subscribe();
   }
 
   getCrew(roleParam: string): Observable<Human[]>{

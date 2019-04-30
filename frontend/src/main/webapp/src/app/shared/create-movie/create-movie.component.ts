@@ -7,6 +7,7 @@ import { Director } from '../model/director';
 import { Producer } from '../model/producer';
 import { Country } from '../model/country';
 import { MovieService } from '../movie/movie.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-movie',
@@ -15,6 +16,7 @@ import { MovieService } from '../movie/movie.service';
 })
 export class CreateMovieComponent implements OnInit {
 
+  id: number;
   movieForm: MovieForm
   genres: Genre[]
   actors: Actor[]
@@ -23,8 +25,15 @@ export class CreateMovieComponent implements OnInit {
   producers: Producer[]
   countries: Country[]
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private route: ActivatedRoute) {
     this.movieForm = new MovieForm();
+    this.id = null;
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      this.movieService.getMovie(params.id).subscribe(movie => {
+        this.movieForm = movie;
+      });
+    });
 
     this.genres = [
       {name: "Horror"},
@@ -93,6 +102,13 @@ export class CreateMovieComponent implements OnInit {
     //Test
     console.log(this.movieForm);
     //Doesn't work atm
-    this.movieService.save(this.movieForm);
+    
+    if(this.id !== undefined){
+      console.log("update :: "+this.id)
+      this.movieService.update(this.movieForm, this.id);
+    }else{
+      console.log("update")
+      this.movieService.save(this.movieForm);
+    }
   }
 }
